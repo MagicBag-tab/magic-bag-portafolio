@@ -16,6 +16,16 @@
   z-index: 12;
 }
 
+.floatingBlocksLayer {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6000px;
+  height: 100%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 7;
+}
+
 .groundDecorLayer {
   position: absolute;
   inset: 0 auto 0 0;
@@ -145,7 +155,7 @@
   border-radius: 0;
   padding: 8px 22px;
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
+  font-size: 0.5rem;
   color: #fff6ff;
   z-index: 60;
   animation: fadeIn 0.5s ease 1s both;

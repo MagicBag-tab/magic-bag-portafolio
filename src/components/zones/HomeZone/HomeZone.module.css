@@ -9,22 +9,17 @@
 
 .floatingText {
   position: absolute;
-  top: 86px;
+  left: 1900px;
+  top: 78px;
   font-family: var(--font-pixel);
-  font-size: 2.35rem;
+  font-size: 2.45rem;
   line-height: 1.35;
   color: #fff;
-  text-shadow: 
-    4px 4px 0px #b8a0d0,
-    -2px -2px 0px #d4b8f0,
-    2px -2px 0px #d4b8f0,
-    -2px 2px 0px #d4b8f0,
-    0px 0px 20px #d4b8f0;
-  animation: floatText 4s ease-in-out infinite;
+  text-shadow:
+    5px 5px 0 #8f63c6,
+    -2px -2px 0 #d4b8f0,
+    2px -2px 0 #d4b8f0,
+    -2px 2px 0 #d4b8f0,
+    0 0 20px #d4b8f0;
   white-space: nowrap;
-}
-
-@keyframes floatText {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
 }

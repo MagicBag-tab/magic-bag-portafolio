@@ -10,21 +10,22 @@ import {
   flowerPansy,
   flowerTulip,
 } from '../../assets/index';
+import { FLOATING_BLOCKS } from '../../data/platforms';
 import styles from './FloatingBlocks.module.css';
 
-const BLOCKS = [
-  { id: 1, x: 1880, y: 270, width: 3, flowers: [flowerCosmo, flowerDaisy] },
-  { id: 2, x: 2520, y: 322, width: 5, flowers: [flowerDaffodil, flowerPansy] },
-  { id: 3, x: 3160, y: 205, width: 3, flowers: [flowerLavender] },
-  { id: 4, x: 3920, y: 276, width: 4, flowers: [flowerTulip, flowerDaisy] },
-  { id: 5, x: 4580, y: 236, width: 4, flowers: [flowerCosmo] },
-  { id: 6, x: 5260, y: 328, width: 3, flowers: [flowerPansy, flowerLavender] },
-];
+const FLOWERS = {
+  cosmo: flowerCosmo,
+  daffodil: flowerDaffodil,
+  daisy: flowerDaisy,
+  lavender: flowerLavender,
+  pansy: flowerPansy,
+  tulip: flowerTulip,
+};
 
 export default function FloatingBlocks() {
   return (
     <div className={styles.layer} aria-hidden="true">
-      {BLOCKS.map((block) => (
+      {FLOATING_BLOCKS.map((block) => (
         <div
           key={block.id}
           className={styles.platform}
@@ -50,10 +51,12 @@ export default function FloatingBlocks() {
             {block.flowers.map((flower, index) => (
               <img
                 key={`${block.id}-flower-${index}`}
-                src={flower}
+                src={FLOWERS[flower]}
                 alt=""
                 className={styles.platformFlower}
-                style={{ left: `${56 + index * 70}px` }}
+                style={{
+                  left: `calc(${((index + 1) / (block.flowers.length + 1)) * 100}% - 19px)`,
+                }}
               />
             ))}
           </div>

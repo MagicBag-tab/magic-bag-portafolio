@@ -87,7 +87,7 @@
   background: transparent;
   border: none;
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   color: #a080c0;
   cursor: pointer;
   padding: 10px 20px;
@@ -108,7 +108,7 @@
 
 .soundBtn {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.62rem;
   background: rgba(212, 184, 240, 0.2);
   color: #d4b8f0;
   border: 2px solid rgba(212, 184, 240, 0.4);
@@ -130,7 +130,7 @@
   background: #d4b8f0;
   color: #1a0a2e;
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.62rem;
   border: none;
   border-radius: 8px;
   padding: 12px 24px;
@@ -223,10 +223,33 @@
 .sectionTitle {
   font-family: var(--font-pixel);
   font-size: 0.7rem;
-  color: #f0d8ff;
-  margin: 0 0 15px 0;
-  border-bottom: 2px dashed rgba(212, 184, 240, 0.3);
-  padding-bottom: 10px;
+  color: #fff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(212, 184, 240, 0.4);
+}
+
+.exportBtn {
+  font-family: var(--font-pixel);
+  font-size: 0.4rem;
+  background: #d4b8f0;
+  color: #1a0a2e;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #9888cc;
+}
+
+.exportBtn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #9888cc;
+  background: #e4c8ff;
+}
+
+.exportBtn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #9888cc;
 }
 
 .text {
@@ -252,7 +275,7 @@
 
 .badge {
   font-family: var(--font-pixel);
-  font-size: 0.4rem;
+  font-size: 0.52rem;
   background: rgba(212, 184, 240, 0.15);
   color: #e4c8ff;
   border: 1px solid rgba(212, 184, 240, 0.4);
@@ -359,7 +382,7 @@
 
 .techBadge {
   font-family: var(--font-pixel);
-  font-size: 0.35rem;
+  font-size: 0.48rem;
   background: rgba(255,255,255,0.1);
   color: #d4b8f0;
   padding: 4px 8px;
@@ -375,7 +398,7 @@
   flex: 1;
   text-align: center;
   font-family: var(--font-pixel);
-  font-size: 0.4rem;
+  font-size: 0.52rem;
   text-decoration: none;
   background: rgba(255, 255, 255, 0.1);
   color: #fff;

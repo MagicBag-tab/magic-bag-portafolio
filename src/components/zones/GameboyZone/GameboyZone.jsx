@@ -24,7 +24,7 @@ export default function GameboyZone({ isNear = false, onActivate }) {
         className={styles.gameboyWrapper}
         style={{
           left: `${GAMEBOY_X}px`,
-          bottom: '24%',
+          bottom: '20%',
           width: `${GAMEBOY_WIDTH}px`,
           height: `${GAMEBOY_HEIGHT}px`,
         }}
@@ -50,8 +50,6 @@ export default function GameboyZone({ isNear = false, onActivate }) {
         <div className={styles.screenSlot}>
           <GameboyScreen />
         </div>
-
-        <div className={`${styles.glow} ${isNear ? styles.glowActive : ''}`} />
       </div>
     </div>
   );

@@ -39,16 +39,16 @@
 
 .computerPokemon {
   position: absolute;
-  left: 48%;
-  top: -9%;
+  left: 59%;
+  top: -10%;
   z-index: 4;
   pointer-events: none;
   filter: drop-shadow(0 4px 0 rgba(24, 18, 30, 0.3));
 }
 
 .computerPokemon img {
-  width: 120px;
-  height: 120px;
+  width: 132px;
+  height: 132px;
   image-rendering: pixelated;
 }
 
@@ -62,24 +62,4 @@
   background: #05070d;
   z-index: 2;
   image-rendering: pixelated;
-}
-
-.glow {
-  position: absolute;
-  inset: -8px;
-  background: radial-gradient(ellipse at 32% 46%, rgba(176, 218, 255, 0.28) 0%, transparent 64%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  animation: glowPulse 3s ease-in-out infinite;
-  z-index: 0;
-}
-
-.glowActive {
-  opacity: 1;
-}
-
-@keyframes glowPulse {
-  0%, 100% { transform: scale(1); opacity: 0.45; }
-  50% { transform: scale(1.04); opacity: 0.8; }
 }

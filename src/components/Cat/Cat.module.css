@@ -1,5 +1,6 @@
 .cat {
   position: absolute;
+  overflow: hidden;
   transform-origin: bottom center;
   pointer-events: none;
   z-index: 80;
@@ -10,6 +11,13 @@
     contrast(1.25)
     drop-shadow(0 5px 0 rgba(20, 14, 28, 0.45))
     drop-shadow(0 0 8px rgba(255, 235, 255, 0.45));
+}
+
+.spriteSheet {
+  display: block;
+  position: absolute;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .placeholder {

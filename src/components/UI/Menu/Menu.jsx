@@ -103,7 +103,7 @@ function AboutContent() {
       <div className={styles.profileHeader}>
         <h1 className={styles.nameTitle}>Sarah Rachel Estrada Bonilla</h1>
         <p className={styles.subtitle}>
-          Guatemala - <a href="mailto:sarahestrada33@gmail.com">sarahestrada33@gmail.com</a> - +502 47532799
+          Guatemala - <a href="mailto:sarahestrada33@gmail.com">sarahestrada33@gmail.com</a>
         </p>
         <div className={styles.socialLinks}>
           <a href="https://github.com/MagicBag-tab" target="_blank" rel="noreferrer">GitHub</a>

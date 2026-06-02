@@ -1,3 +1,11 @@
+import {
+  screenshotFlowdesk,
+  screenshotGallery,
+  screenshotMusic,
+  screenshotEpic,
+  screenshotEstacion,
+} from '../assets/index';
+
 export const projects = [
   {
     id: 1,
@@ -10,6 +18,7 @@ export const projects = [
     demo: '',
     pokemon: 'pikachu',
     color: '#3498db',
+    screenshot: screenshotFlowdesk,
   },
   {
     id: 2,
@@ -22,6 +31,7 @@ export const projects = [
     demo: '',
     pokemon: 'eevee',
     color: '#9b59b6',
+    screenshot: screenshotGallery,
   },
   {
     id: 3,
@@ -34,6 +44,7 @@ export const projects = [
     demo: 'https://music-mood-api-1.onrender.com',
     pokemon: 'bulbasaur',
     color: '#2ecc71',
+    screenshot: screenshotMusic,
   },
   {
     id: 4,
@@ -46,6 +57,7 @@ export const projects = [
     demo: '',
     pokemon: 'snorlax',
     color: '#e74c3c',
+    screenshot: screenshotEpic,
   },
   {
     id: 5,
@@ -58,6 +70,7 @@ export const projects = [
     demo: '',
     pokemon: 'gengar',
     color: '#f1c40f',
+    screenshot: null,
   },
   {
     id: 6,
@@ -70,5 +83,6 @@ export const projects = [
     demo: '',
     pokemon: 'pikachu', // reutilizado
     color: '#e67e22',
+    screenshot: screenshotEstacion,
   },
 ];

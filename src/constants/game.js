@@ -1,7 +1,7 @@
 
 
 export const GRAVITY      = 0.6;
-export const JUMP_FORCE   = -13;
+export const JUMP_FORCE   = -16;
 export const WALK_SPEED   = 3;
 export const RUN_SPEED    = 6;
 
@@ -20,8 +20,12 @@ export const FRAME_SIZE         = 64;
 export const SPRITE_COLS        = 14;
 export const SPRITE_SCALE       = 2;
 
+// How many pixels the cat's visible feet are above the bottom of its 128px frame.
+// Applied to both ground and platforms so the sprite sits flush rather than floating.
+export const SPRITE_FLOOR_OFFSET = 30;
+
 export const getFloorY = () => {
-  return window.innerHeight * 0.76;
+  return window.innerHeight * 0.76 + SPRITE_FLOOR_OFFSET;
 };
 
 export const CLIFF_EDGE_X = 0;
@@ -32,11 +36,13 @@ export const CAMERA_OFFSET_X = 0.4;
 export const NEAR_THRESHOLD = 110;
 
 export const CAT_ANIMATIONS = {
-  idle: { row: 0, frames: 4,  fps: 6  },
-  walk: { row: 1, frames: 8,  fps: 12 },
-  run:  { row: 2, frames: 8,  fps: 16 },
-  jump: { row: 3, frames: 4,  fps: 10 },
-  land: { row: 4, frames: 3,  fps: 10 },
+  idle:  { row: 0,  frames: 4, fps: 6  },
+  lick:  { row: 6,  frames: 8, fps: 8  },
+  sleep: { row: 8,  frames: 6, fps: 5  },
+  walk:  { row: 4,  frames: 6, fps: 10 },
+  run:   { row: 5,  frames: 6, fps: 14 },
+  jump:  { row: 2,  frames: 4, fps: 8  },
+  land:  { row: 1,  frames: 4, fps: 8  },
 };
 
 export const PARALLAX_SPEEDS = {
@@ -47,7 +53,7 @@ export const PARALLAX_SPEEDS = {
   ground:       1.0,
 };
 
-export const GAMEBOY_X               = 160;
+export const GAMEBOY_X               = 420;
 export const GAMEBOY_Y               = 130;
 export const GAMEBOY_WIDTH           = 640;
 export const GAMEBOY_HEIGHT          = 456;

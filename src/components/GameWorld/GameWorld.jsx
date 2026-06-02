@@ -43,6 +43,7 @@ import {
   flowerSunflower,
   flowerTulip,
   bgMusic1,
+  bgMusic2,
   clickSfx,
 } from '../../assets/index';
 import styles from './GameWorld.module.css';
@@ -185,25 +186,50 @@ const INTERACTABLES = [
 
 const LIFE_STARS = [0, 1, 2, 3, 4];
 
-export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
+export default function GameWorld({ soundEnabled, selectedCat, onNavigate }) {
   const [nearObjectId, setNearObjectId] = useState(null);
   const [cameraOffsetX, setCameraOffsetX] = useState(0);
 
   const { computeCamera } = useWorldCamera();
   const musicRef = useRef(null);
+  const trackIndexRef = useRef(0);
+  const soundEnabledRef = useRef(soundEnabled);
   const hasStarted = useRef(false);
 
   useEffect(() => {
-    const audio = new Audio(bgMusic1);
-    audio.loop = true;
-    audio.volume = 0.35;
-    musicRef.current = audio;
-    window.__gameMusic = audio;
+    soundEnabledRef.current = soundEnabled;
+  }, [soundEnabled]);
+
+  useEffect(() => {
+    const tracks = [bgMusic1, bgMusic2];
+    let currentAudio = null;
+    let trackIndex = 0;
+    let started = false;
+
+    const playTrack = (index) => {
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.src = '';
+      }
+      const audio = new Audio(tracks[index]);
+      audio.volume = 0.35;
+      audio.addEventListener('ended', () => {
+        trackIndex = (trackIndex + 1) % tracks.length;
+        if (started && soundEnabledRef.current) playTrack(trackIndex);
+      });
+      currentAudio = audio;
+      musicRef.current = audio;
+      window.__gameMusic = audio;
+      if (started && soundEnabledRef.current) audio.play().catch(() => {});
+    };
+
+    playTrack(trackIndex);
 
     const startMusic = () => {
-      if (!hasStarted.current) {
+      if (!started) {
+        started = true;
         hasStarted.current = true;
-        audio.play().catch(() => {});
+        if (soundEnabledRef.current) currentAudio?.play().catch(() => {});
       }
     };
 
@@ -211,10 +237,9 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
     window.addEventListener('click', startMusic, { once: true });
 
     return () => {
-      audio.pause();
       window.removeEventListener('keydown', startMusic);
       window.removeEventListener('click', startMusic);
-      delete window.__gameMusic;
+      // Keep audio alive (singleton) — don't destroy it
     };
   }, []);
 
@@ -245,7 +270,7 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
     const sfx = new Audio(clickSfx);
     sfx.volume = 0.6;
     sfx.play().catch(() => {});
-    onNavigate('about');
+    onNavigate?.('projects');
   }, [onNavigate]);
 
   return (
@@ -261,6 +286,14 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
           style={layer.style}
         />
       ))}
+
+      <div
+        className={styles.floatingBlocksLayer}
+        style={{ transform: `translateX(${-cameraOffsetX}px)` }}
+        aria-hidden="true"
+      >
+        <FloatingBlocks />
+      </div>
 
       <div
         className={styles.groundDecorLayer}
@@ -280,13 +313,7 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
             }}
           />
         ))}
-      </div>
 
-      <div
-        className={styles.groundFlowerLayer}
-        style={{ transform: `translateX(${-cameraOffsetX}px)` }}
-        aria-hidden="true"
-      >
         {FLOWER_PATCHES.map((patch, index) => (
           <img
             key={`flower-${patch.x}-${index}`}
@@ -327,7 +354,6 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
         style={{ transform: `translateX(${-cameraOffsetX}px)` }}
       >
         <FallingStar />
-        <FloatingBlocks />
         
         <GameboyZone
           isNear={nearObjectId === OBJECT_IDS.GAMEBOY}
@@ -356,7 +382,7 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
         <span>Izq / Der Mover</span>
         <span>Espacio Saltar</span>
         <span>Shift Correr</span>
-        <span>Clic Entrar</span>
+        <span>Clic Interactuar</span>
       </div>
     </div>
   );

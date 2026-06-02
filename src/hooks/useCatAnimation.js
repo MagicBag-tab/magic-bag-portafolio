@@ -65,18 +65,27 @@ export function useCatAnimation(state = 'idle', facingLeft = false, spriteUrl = 
   const spriteStyle = {
     width: `${DISPLAY_SIZE}px`,
     height: `${DISPLAY_SIZE}px`,
-    backgroundImage: spriteUrl ? `url(${spriteUrl})` : 'none',
-    backgroundPosition: `-${frameX * SPRITE_SCALE}px -${frameY * SPRITE_SCALE}px`,
-    backgroundSize: `${sheetWidth * SPRITE_SCALE}px auto`,
-    backgroundRepeat: 'no-repeat',
+    overflow: 'hidden',
+    position: 'absolute',
     imageRendering: 'pixelated',
-    transform: `${facingLeft ? 'scaleX(-1)' : 'scaleX(1)'} scale(2)`,
-    backgroundColor: spriteUrl ? 'transparent' : '#9888cc',
-    borderRadius: spriteUrl ? '0' : '8px',
+    transform: facingLeft ? 'scaleX(1)' : 'scaleX(-1)',
+  };
+
+  const imageStyle = {
+    position: 'absolute',
+    left: `-${frameX * SPRITE_SCALE}px`,
+    top: `-${frameY * SPRITE_SCALE}px`,
+    width: `${sheetWidth * SPRITE_SCALE}px`,
+    height: 'auto',
+    maxWidth: 'none',
+    imageRendering: 'pixelated',
+    pointerEvents: 'none',
+    userSelect: 'none',
   };
 
   return {
     spriteStyle,
+    imageStyle,
     currentFrame,
     displaySize: DISPLAY_SIZE,
   };

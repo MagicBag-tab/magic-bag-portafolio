@@ -29,11 +29,19 @@ import flowerSunflower from './flowers/Sunflower.png';
 import flowerTulip from './flowers/Tulip.png';
 import fallingStarSprite from './flowers/FallingStar_Sprites.png';
 import bgMusic1 from './audio/bg_music-1.wav';
+import bgMusic2 from './audio/bg_music-2.wav';
 import jumpSfx from './audio/jump.wav';
 import clickSfx from './audio/click.wav';
 import computerFrame from './screens/Computer.png';
 import projectorFrame from './screens/ProjectorScreenClean1000.png';
 import crispyTvFrame from './screens/CrispyTV1000.png';
+
+// Screenshots
+import screenshotFlowdesk from './screenshots/flowdesk.png';
+import screenshotGallery from './screenshots/magic-bag-gallery.png';
+import screenshotMusic from './screenshots/music-mood.png';
+import screenshotEpic from './screenshots/epic-api.png';
+import screenshotEstacion from './screenshots/estacion_metero.jpeg';
 
 const flower1 = flowerCosmo;
 const flower2 = flowerDaisy;
@@ -74,9 +82,15 @@ export {
   flowerTulip,
   fallingStarSprite,
   bgMusic1,
+  bgMusic2,
   jumpSfx,
   clickSfx,
   computerFrame,
   projectorFrame,
   crispyTvFrame,
+  screenshotFlowdesk,
+  screenshotGallery,
+  screenshotMusic,
+  screenshotEpic,
+  screenshotEstacion,
 };

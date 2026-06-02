@@ -1,16 +1,36 @@
-# React + Vite
+# Magic Bag Portafolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es el portafolio interactivo de **Sarah Rachel Estrada Bonilla**. Un mundo en 2D pixel art donde puedes explorar y conocer más sobre su experiencia, proyectos y tecnologías.
 
-Currently, two official plugins are available:
+## 🎮 Controles del Juego
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Izquierda / Derecha**: Mover al personaje.
+- **Espacio**: Saltar.
+- **Shift**: Correr.
+- **Click o Enter**: Interactuar con elementos brillantes (Gameboy, TV).
 
-## React Compiler
+## 🚀 Zonas del Mundo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Inicio**: El gatito aparece aquí junto a un cartel flotante y una TV interactiva que abre la pestaña de "Sobre Mí".
+- **Tech / Proyectos**: Un área con una gran Gameboy retro flotante, que al interactuar abre el apartado de proyectos.
+- **Cine Pokémon**: Una pantalla grande al aire libre proyectando imágenes (screenshots) de cada proyecto, acompañada de público Pokémon.
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologías del Proyecto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Este portafolio ha sido construido con:
+- React (Vite)
+- CSS Modules (Vanilla CSS, sin Tailwind)
+- Lógica custom en Hooks para el motor físico del mundo (scroll parallax, gravedad, colisiones, cámara).
+- Assets pixel art curados (pipoya, itch.io).
+
+## 💻 Sobre la Creadora
+
+Sarah es estudiante de tercer año de Ingeniería en Ciencias de la Computación en la Universidad del Valle de Guatemala.
+**Tecnologías:** `HTML`, `CSS`, `JavaScript`, `React`, `Vue`, `Go`, `Python`, `C++`, `TypeScript`, `PostgreSQL`, `Docker`.
+
+### Proyectos Destacados
+- FlowDesk (Vue 3, Go, PostgreSQL)
+- Magic Bag Gallery (React 18, Go, PostgreSQL)
+- Music Mood API (Go, API RESTful)
+
+[GitHub](https://github.com/MagicBag-tab) | [LinkedIn](https://www.linkedin.com/in/sarah-estrada-5347282b2/)

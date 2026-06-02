@@ -45,7 +45,7 @@
 .platformFlower {
   position: absolute;
   bottom: 0;
-  width: 34px;
+  width: 42px;
   image-rendering: pixelated;
   filter: drop-shadow(0 3px 0 rgba(24, 18, 30, 0.2));
 }
