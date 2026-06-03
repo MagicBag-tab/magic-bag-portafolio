@@ -1,4 +1,3 @@
-
 .zone {
   position: absolute;
   top: 0;
@@ -16,27 +15,10 @@
   background: linear-gradient(
     to right,
     #c8b0e8 0%,
-    #d8c0f0 40%,
+    #d8c0f0 48%,
     transparent 100%
   );
   pointer-events: none;
-}
-
-.cliffEdge {
-  position: absolute;
-  bottom: 14%;
-  width: 40px;
-  height: 80px;
-  background: linear-gradient(
-    to right,
-    #6aab3a 0%,
-    #4a8820 30%,
-    #2d5010 70%,
-    transparent 100%
-  );
-  border-radius: 0 0 8px 0;
-
-  box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.22);
 }
 
 .gameboyWrapper {
@@ -51,231 +33,51 @@
   filter: brightness(1.08);
 }
 
-@keyframes floatGameboy {
-  0%, 100% { transform: translateY(0px) rotate(-1deg); }
-  50%       { transform: translateY(-14px) rotate(1deg); }
-}
-
-.gameboyBody {
+.gameboyFrame {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(160deg, #c8c8c0 0%, #b8b8b0 50%, #a0a098 100%);
-  border-radius: 12px 12px 50px 12px;
-  border: 3px solid #888880;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 12px 14px 10px;
-  box-shadow:
-    inset 0 2px 4px rgba(255,255,255,0.4),
-    inset 0 -2px 4px rgba(0,0,0,0.2),
-    0 8px 24px rgba(0,0,0,0.3);
-  gap: 0;
-}
-
-.gameboyLogo {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 6px;
-  align-self: flex-start;
-}
-
-.logoLine {
-  font-size: 8px;
-  color: #d44a7a;
-}
-
-.logoText {
-  font-family: var(--font-pixel);
-  font-size: 0.32rem;
-  color: #444;
-  letter-spacing: 1px;
-}
-
-.screenOuter {
-  background: linear-gradient(145deg, #888880 0%, #999990 100%);
-  border-radius: 8px 8px 20px 8px;
-  padding: 8px;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 2px 4px rgba(255,255,255,0.2);
-  width: 100%;
-}
-
-.screenInner {
-  background: #2a2a28;
-  border-radius: 6px 6px 16px 6px;
-  padding: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.dotMatrix {
-  font-family: var(--font-pixel);
-  font-size: 0.2rem;
-  color: #c44a7a;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
-  text-align: center;
-}
-
-.dotMatrix span {
-  display: block;
-}
-
-.lcdScreen {
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow:
-    inset 0 0 8px rgba(0,0,0,0.5),
-    0 0 0 3px #111;
+  object-fit: contain;
   image-rendering: pixelated;
-}
-
-.controlsRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 10px;
-  padding: 0 4px;
-}
-
-.dpad {
-  position: relative;
-  width: 52px;
-  height: 52px;
-}
-
-.dpadBtn {
-  position: absolute;
-  background: #444440;
-  border-radius: 3px;
-}
-
-.dpadUp    { top: 0;   left: 50%; transform: translateX(-50%); width: 16px; height: 16px; }
-.dpadDown  { bottom:0; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; }
-.dpadLeft  { left: 0;  top:  50%; transform: translateY(-50%); width: 16px; height: 16px; }
-.dpadRight { right:0;  top:  50%; transform: translateY(-50%); width: 16px; height: 16px; }
-
-.dpadCenter {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 16px; height: 16px;
-  background: #444440;
-  border-radius: 2px;
   z-index: 1;
+  filter: drop-shadow(0 12px 18px rgba(72, 28, 88, 0.22));
 }
 
-.startSelect {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: center;
-}
-
-.selectBtn,
-.startBtn {
-  width: 32px;
-  height: 8px;
-  background: #777770;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 0 rgba(0,0,0,0.2);
-}
-
-.selectBtn span,
-.startBtn span {
-  font-family: var(--font-pixel);
-  font-size: 0.18rem;
-  color: #333;
-}
-
-.abButtons {
-  display: flex;
-  gap: 6px;
-  transform: rotate(-15deg);
-}
-
-.abBtn {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-pixel);
-  font-size: 0.3rem;
-  font-weight: bold;
-  color: white;
-  box-shadow: 0 3px 0 rgba(0,0,0,0.3);
-}
-
-.btnA { background: #c0392b; }
-.btnB { background: #8e44ad; }
-
-.speaker {
-  display: flex;
-  gap: 4px;
-  margin-top: 8px;
-  align-self: flex-end;
-  padding-right: 8px;
-}
-
-.speakerDot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #888880;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+.screenSlot {
+  position: absolute;
+  left: 27.6%;
+  top: 13.8%;
+  width: 46%;
+  height: 38%;
+  overflow: hidden;
+  background: #9bbc0f;
+  z-index: 2;
+  image-rendering: pixelated;
 }
 
 .glow {
   position: absolute;
   inset: -12px;
   border-radius: 24px;
-  background: radial-gradient(ellipse at center, rgba(212,184,240,0.4) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(255, 210, 238, 0.55) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
   animation: glowPulse 3s ease-in-out infinite;
+  z-index: 0;
 }
 
 .glowActive {
   opacity: 1;
 }
 
+@keyframes floatGameboy {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-14px) rotate(1deg); }
+}
+
 @keyframes glowPulse {
-  0%, 100% { transform: scale(1);    opacity: 0.5; }
-  50%       { transform: scale(1.05); opacity: 0.9; }
-}
-
-.voidClouds {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1600px;
-  height: 100%;
-  pointer-events: none;
-}
-
-.voidCloud {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 240, 255, 0.25);
-  filter: blur(20px);
-  animation: driftCloud 8s ease-in-out infinite;
-}
-
-.vc1 { width: 200px; height: 80px; left: 100px; top: 15%;  animation-delay: 0s;   }
-.vc2 { width: 160px; height: 60px; left: 400px; top: 30%;  animation-delay: 2s;   }
-.vc3 { width: 180px; height: 70px; left: 250px; top: 50%;  animation-delay: 4s;   }
-
-@keyframes driftCloud {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  50%       { transform: translateX(20px) translateY(-10px); }
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 0.9; }
 }

@@ -3,7 +3,6 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-
   background: #f5d8f8;
 }
 
@@ -24,13 +23,43 @@
   pointer-events: none;
   z-index: 8;
   animation: floatCloud 4s ease-in-out infinite;
-
   transition: opacity 0.4s ease;
 }
 
-@keyframes floatCloud {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-12px); }
+.flowerDecorLayer {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6000px;
+  height: 100%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 8;
+}
+
+.groundFlower {
+  position: absolute;
+  bottom: 19%;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 6px 0 rgba(74, 62, 97, 0.16));
+  animation: floatFlower 3.8s ease-in-out infinite;
+}
+
+.lifeStars {
+  position: absolute;
+  top: 16px;
+  left: 22px;
+  display: flex;
+  gap: 8px;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.lifeStars img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 3px 0 rgba(74, 62, 97, 0.22));
 }
 
 .controls {
@@ -54,7 +83,17 @@
   white-space: nowrap;
 }
 
+@keyframes floatCloud {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes floatFlower {
+  0%, 100% { transform-origin: bottom center; }
+  50% { translate: 0 -5px; }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }

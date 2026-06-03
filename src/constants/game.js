@@ -42,18 +42,15 @@ export const CAT_ANIMATIONS = {
 
 export const PARALLAX_SPEEDS = {
   sky:          0.0,
-  cloudsFar:    0.10,
-  cloudsNear1:  0.22,
-  cloudsNear2:  0.30,
   mountains:    0.45,
   groundFlower: 0.85,
   ground:       1.0,
 };
 
-export const GAMEBOY_X               = 820;
+export const GAMEBOY_X               = 720;
 export const GAMEBOY_Y               = 130;
-export const GAMEBOY_WIDTH           = 260;
-export const GAMEBOY_HEIGHT          = 360;
+export const GAMEBOY_WIDTH           = 430;
+export const GAMEBOY_HEIGHT          = 376;
 export const GAMEBOY_SCREEN_W        = 160;
 export const GAMEBOY_SCREEN_H        = 144;
 

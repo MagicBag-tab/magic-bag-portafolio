@@ -1,4 +1,5 @@
 import styles from './ParallaxLayer.module.css';
+import { WORLD_WIDTH } from '../../constants/game';
 
 export default function ParallaxLayer({
   speed = 0.5,
@@ -17,6 +18,7 @@ export default function ParallaxLayer({
 
   const layerStyle = {
     transform: `translateX(${translateX}px)`,
+    width: `${WORLD_WIDTH}px`,
     height,
     backgroundColor: color,
     zIndex,

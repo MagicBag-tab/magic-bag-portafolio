@@ -2,9 +2,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-
-  min-width: 200%;
+  min-width: 100%;
   will-change: transform;
   pointer-events: none;
 }

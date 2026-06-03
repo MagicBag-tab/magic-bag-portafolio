@@ -2,9 +2,6 @@ import catSpriteBlack from './sprites/cat 1 (64х64).png';
 import catSpriteGinger from './sprites/cat 2 (64х64).png';
 import catSpriteWhite from './sprites/cat 3 (64х64).png';
 import skyBg from './backgrounds/sky.png';
-import cloudsFar from './backgrounds/clauds-far.png';
-import cloudsNear1 from './backgrounds/clauds-near-1.png';
-import cloudsNear2 from './backgrounds/clauds-near-2.png';
 import mountainsBg from './backgrounds/mountains.png';
 import groundBg from './backgrounds/ground.png';
 import groundFlowers from './backgrounds/ground-flowers.png';
@@ -19,15 +16,14 @@ import star from './flowers/star.png';
 import bgMusic1 from './audio/bg_music-1.wav';
 import jumpSfx from './audio/jump.wav';
 import clickSfx from './audio/click.wav';
+import gameboyFrame from './screens/gameboy.png';
+import cinemaScreenFrame from './screens/pantalla.png';
 
 export {
   catSpriteBlack,
   catSpriteGinger,
   catSpriteWhite,
   skyBg,
-  cloudsFar,
-  cloudsNear1,
-  cloudsNear2,
   mountainsBg,
   groundBg,
   groundFlowers,
@@ -42,4 +38,6 @@ export {
   bgMusic1,
   jumpSfx,
   clickSfx,
+  gameboyFrame,
+  cinemaScreenFrame,
 };

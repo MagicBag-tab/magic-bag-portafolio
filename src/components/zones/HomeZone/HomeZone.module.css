@@ -48,16 +48,3 @@
   top: 28px;
   left: calc(100% + 6px);
 }
-
-.flower {
-  position: absolute;
-  bottom: 13%;
-  image-rendering: pixelated;
-  animation: floatFlower 3.5s ease-in-out infinite;
-  opacity: 0.85;
-}
-
-@keyframes floatFlower {
-  0%, 100% { transform-origin: bottom center; }
-  50%       { transform: translateY(-4px) rotate(2deg); }
-}
