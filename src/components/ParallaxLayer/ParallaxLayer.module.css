@@ -1,0 +1,10 @@
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* El ancho real es más grande para cubrir el scroll */
+  min-width: 200%;
+  will-change: transform; /* optimización GPU */
+  pointer-events: none;
+}

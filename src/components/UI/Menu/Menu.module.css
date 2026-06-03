@@ -1,0 +1,161 @@
+/* Botón hamburguesa */
+.hamburger {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: var(--z-menu);
+  width: 46px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 184, 240, 0.5);
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.hamburger:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-purple-deep);
+  border-radius: 2px;
+  transition: transform var(--transition-medium), opacity var(--transition-medium);
+  transform-origin: center;
+}
+
+/* Animación de X cuando está abierto */
+.hamburgerOpen .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburgerOpen .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburgerOpen .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Overlay oscuro */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: calc(var(--z-menu) - 1);
+  animation: fadeIn 0.2s ease both;
+}
+
+/* Panel de menú */
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 220px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(212, 184, 240, 0.4);
+  box-shadow: -4px 0 24px rgba(152, 136, 204, 0.15);
+  z-index: var(--z-menu);
+  padding: 5rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transform: translateX(100%);
+  transition: transform var(--transition-medium);
+}
+
+.panelOpen {
+  transform: translateX(0);
+}
+
+.panelTitle {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--color-purple-deep);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(212, 184, 240, 0.3);
+}
+
+/* Lista de navegación */
+.navList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.navItem {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--color-purple-deep);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.navItem:hover {
+  background: rgba(212, 184, 240, 0.25);
+  transform: translateX(4px);
+}
+
+.navItemActive {
+  background: rgba(212, 184, 240, 0.4);
+  color: var(--color-purple);
+}
+
+/* Divisor */
+.divider {
+  height: 1px;
+  background: rgba(212, 184, 240, 0.3);
+  margin: 0.5rem 0 1rem;
+}
+
+/* Toggle de sonido */
+.soundToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(212, 184, 240, 0.15);
+  border: 1px solid rgba(212, 184, 240, 0.3);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  width: 100%;
+}
+
+.soundToggle:hover {
+  background: rgba(212, 184, 240, 0.3);
+}
+
+.soundIcon  { font-size: 1.25rem; }
+
+.soundLabel {
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: var(--color-purple-deep);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

@@ -1,0 +1,142 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, #f5d8f8 0%, #e8c0f0 40%, #d4b8f0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-screen);
+  animation: fadeInScale 0.5s ease both;
+  overflow: hidden;
+}
+
+/* Nubes flotantes de fondo */
+.clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  font-size: 4rem;
+  opacity: 0.5;
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+/* Gatito sobre nube */
+.catOnCloud {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  animation: floatUpDown 3s ease-in-out infinite;
+}
+
+.catEmoji  { font-size: 4rem; margin-bottom: -1rem; z-index: 1; }
+.cloudBase { font-size: 5rem; filter: drop-shadow(0 4px 12px rgba(152, 136, 204, 0.3)); }
+
+/* Tarjeta principal */
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 184, 240, 0.5);
+  border-radius: 24px;
+  padding: 2.5rem 3rem;
+  max-width: 460px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(152, 136, 204, 0.2);
+  animation: fadeIn 0.6s ease 0.3s both;
+}
+
+.greeting {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  color: var(--color-purple);
+  margin-bottom: 0.75rem;
+}
+
+.question {
+  font-family: var(--font-main);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-purple-deep);
+  margin-bottom: 1.5rem;
+}
+
+/* Formulario */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  border: 2px solid var(--color-lavender);
+  border-radius: 14px;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  color: var(--color-purple-deep);
+  background: rgba(255, 255, 255, 0.8);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input:focus {
+  border-color: var(--color-purple);
+  box-shadow: 0 0 0 3px rgba(152, 136, 204, 0.2);
+}
+
+.input::placeholder { color: var(--color-lavender-mid); }
+
+.button {
+  padding: 0.85rem 1.5rem;
+  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-purple-deep) 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(152, 136, 204, 0.4);
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(152, 136, 204, 0.5);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mensaje de bienvenida */
+.welcome {
+  font-family: var(--font-main);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-purple-deep);
+  animation: fadeInScale 0.4s ease both;
+}
+
+/* Animaciones */
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
