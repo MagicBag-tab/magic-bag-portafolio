@@ -16,15 +16,26 @@ import {
   getFloorY,
 } from '../../constants/game';
 
-import { catSprite, jumpSfx } from '../../assets/index';
+import { catSpriteBlack, catSpriteGinger, catSpriteWhite, jumpSfx } from '../../assets/index';
 
 import styles from './Cat.module.css';
 
+// =========================================
+// Cat — personaje principal pixel art
+//
+// Props:
+//   interactables   — array de { id, x } del mundo (Gameboy, puertas, etc.)
+//   onNearObject(id) — callback al acercarse a un objeto
+//   onLeaveObject()  — callback al alejarse de todos los objetos
+//   onPositionChange(x) — callback con posición X para la cámara
+//   selectedCat     — 'black', 'ginger', or 'white'
+// =========================================
 export default function Cat({
   interactables = [],
   onNearObject,
   onLeaveObject,
   onPositionChange,
+  selectedCat = 'black',
 }) {
 
   const initialFloorY = getFloorY();
@@ -56,7 +67,16 @@ export default function Cat({
     onPosRef.current = onPositionChange;
   }, [onNearObject, onLeaveObject, onPositionChange]);
 
-  const { spriteStyle } = useCatAnimation(catState, facingLeft, catSprite);
+  // ── Sprite seleccionado ───────────────────────────────────────────────────────
+  const spritesMap = {
+    black: catSpriteBlack,
+    ginger: catSpriteGinger,
+    white: catSpriteWhite,
+  };
+  const activeSprite = spritesMap[selectedCat] || catSpriteBlack;
+
+  // ── Animación del sprite ──────────────────────────────────────────────────────
+  const { spriteStyle } = useCatAnimation(catState, facingLeft, activeSprite);
 
   const playJump = useCallback(() => {
     const sfx = new Audio(jumpSfx);

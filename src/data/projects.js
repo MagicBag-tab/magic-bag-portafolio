@@ -13,7 +13,6 @@ export const projects = [
     video: '',
     screenshot: '',
     pokemon: 'pikachu',
-    doorX: 4350,
     color: '#FFD700',
   },
   {
@@ -28,7 +27,6 @@ export const projects = [
     video: '',
     screenshot: '',
     pokemon: 'eevee',
-    doorX: 4570,
     color: '#C77DFF',
   },
   {
@@ -43,7 +41,6 @@ export const projects = [
     video: '',
     screenshot: '',
     pokemon: 'bulbasaur',
-    doorX: 4790,
     color: '#80ED99',
   },
 ];

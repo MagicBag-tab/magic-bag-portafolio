@@ -21,7 +21,7 @@ export const SPRITE_COLS        = 14;
 export const SPRITE_SCALE       = 2;
 
 export const getFloorY = () => {
-  const groundTop = window.innerHeight * 0.855;
+  const groundTop = window.innerHeight * 0.76;
   return groundTop - FRAME_SIZE * SPRITE_SCALE;
 };
 
@@ -74,14 +74,8 @@ export const POKEMON_AUDIENCE = [
   { id: 'bulbasaur', pokeId: 1,   x: 4060, scale: 1.5, delay: 900,  projectId: 3    },
 ];
 
-export const DOOR_START_X  = 4350;
-export const DOOR_SPACING  = 220;
-export const DOOR_WIDTH    = 90;
-export const DOOR_HEIGHT   = 120;
-
 export const OBJECT_IDS = {
   GAMEBOY:    'gameboy',
-  DOOR_BASE:  'door_',
 };
 
 export const FLOOR_Y              = 520;

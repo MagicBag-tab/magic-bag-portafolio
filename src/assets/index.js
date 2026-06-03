@@ -1,4 +1,6 @@
-import catSprite from './sprites/cat 1 (64х64).png';
+import catSpriteBlack from './sprites/cat 1 (64х64).png';
+import catSpriteGinger from './sprites/cat 2 (64х64).png';
+import catSpriteWhite from './sprites/cat 3 (64х64).png';
 import skyBg from './backgrounds/sky.png';
 import cloudsFar from './backgrounds/clauds-far.png';
 import cloudsNear1 from './backgrounds/clauds-near-1.png';
@@ -19,7 +21,9 @@ import jumpSfx from './audio/jump.wav';
 import clickSfx from './audio/click.wav';
 
 export {
-  catSprite,
+  catSpriteBlack,
+  catSpriteGinger,
+  catSpriteWhite,
   skyBg,
   cloudsFar,
   cloudsNear1,

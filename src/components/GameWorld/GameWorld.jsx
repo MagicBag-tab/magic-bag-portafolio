@@ -42,7 +42,7 @@ const PARALLAX_LAYERS = [
     imageUrl: cloudsFar,
     height: '70%',
     zIndex: 2,
-    style: { top: '-5%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
+    style: { top: '80px', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
   },
   {
     id: 'clouds-near-1',
@@ -50,7 +50,7 @@ const PARALLAX_LAYERS = [
     imageUrl: cloudsNear1,
     height: '55%',
     zIndex: 3,
-    style: { top: '0%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
+    style: { top: '60px', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
   },
   {
     id: 'clouds-near-2',
@@ -58,7 +58,7 @@ const PARALLAX_LAYERS = [
     imageUrl: cloudsNear2,
     height: '55%',
     zIndex: 4,
-    style: { top: '5%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
+    style: { top: '65px', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
   },
   {
     id: 'mountains',
@@ -71,17 +71,17 @@ const PARALLAX_LAYERS = [
       top: 'auto',
       backgroundSize: 'auto 100%',
       backgroundRepeat: 'repeat-x',
-      backgroundPosition: 'bottom center',
+      backgroundPosition: 'bottom',
     },
   },
   {
     id: 'ground-flowers',
     speed: 0.85,
     imageUrl: groundFlowers,
-    height: '22%',
+    height: '35%',
     zIndex: 6,
     style: {
-      bottom: '12%',
+      bottom: '18%',
       top: 'auto',
       backgroundSize: 'auto 100%',
       backgroundRepeat: 'repeat-x',
@@ -92,7 +92,7 @@ const PARALLAX_LAYERS = [
     id: 'ground',
     speed: 1.0,
     imageUrl: groundBg,
-    height: '16%',
+    height: '25%',
     zIndex: 7,
     style: {
       bottom: 0,
@@ -104,28 +104,27 @@ const PARALLAX_LAYERS = [
   },
 ];
 
+// ─── Nubes pixel art flotantes ─────────────────────────────────────────────────
 const PIXEL_CLOUDS = [
-  { id: 'pc1', x: 400,  y: 60,  imgA: cloudA1, imgB: cloudB1, scale: 2.4, delay: 0    },
-  { id: 'pc2', x: 1100, y: 45,  imgA: cloudA2, imgB: cloudB2, scale: 2.0, delay: 1200 },
-  { id: 'pc3', x: 2000, y: 70,  imgA: cloudA1, imgB: cloudB1, scale: 2.6, delay: 600  },
-  { id: 'pc4', x: 2900, y: 50,  imgA: cloudA2, imgB: cloudB2, scale: 2.1, delay: 1800 },
-  { id: 'pc5', x: 3900, y: 65,  imgA: cloudA1, imgB: cloudB1, scale: 1.9, delay: 400  },
-  { id: 'pc6', x: 4800, y: 55,  imgA: cloudA2, imgB: cloudB2, scale: 2.2, delay: 1000 },
+  { id: 'pc1', x: 200,  y: 50,  imgA: cloudA1, imgB: cloudB1, scale: 2.2, opacity: 1,   delay: 0    },
+  { id: 'pc2', x: 700,  y: 90,  imgA: cloudA2, imgB: cloudB2, scale: 1.8, opacity: 0.8, delay: 1500 },
+  { id: 'pc3', x: 1100, y: 40,  imgA: cloudA1, imgB: cloudB1, scale: 3.0, opacity: 1,   delay: 800  },
+  { id: 'pc4', x: 1600, y: 110, imgA: cloudA2, imgB: cloudB2, scale: 2.0, opacity: 0.7, delay: 2000 },
+  { id: 'pc5', x: 2100, y: 55,  imgA: cloudA1, imgB: cloudB1, scale: 2.6, opacity: 1,   delay: 500  },
+  { id: 'pc6', x: 2600, y: 80,  imgA: cloudA2, imgB: cloudB2, scale: 1.9, opacity: 0.8, delay: 1800 },
+  { id: 'pc7', x: 3100, y: 45,  imgA: cloudA1, imgB: cloudB1, scale: 2.8, opacity: 1,   delay: 1100 },
+  { id: 'pc8', x: 3700, y: 100, imgA: cloudA2, imgB: cloudB2, scale: 2.1, opacity: 0.7, delay: 600  },
+  { id: 'pc9', x: 4200, y: 60,  imgA: cloudA1, imgB: cloudB1, scale: 2.4, opacity: 0.9, delay: 1400 },
+  { id: 'pc10',x: 4800, y: 85,  imgA: cloudA2, imgB: cloudB2, scale: 1.9, opacity: 0.8, delay: 900  },
+  { id: 'pc11',x: 5300, y: 50,  imgA: cloudA1, imgB: cloudB1, scale: 2.7, opacity: 1,   delay: 300  },
 ];
 
-const buildInteractables = () => {
-  const list = [
-    { id: OBJECT_IDS.GAMEBOY, x: GAMEBOY_X + 130 },
-  ];
-  projects.forEach((p) => {
-    list.push({ id: `${OBJECT_IDS.DOOR_BASE}${p.id}`, x: p.doorX + 45 });
-  });
-  return list;
-};
+// ─── Lista de interactables para el gato ──────────────────────────────────────
+const INTERACTABLES = [
+  { id: OBJECT_IDS.GAMEBOY, x: GAMEBOY_X + 130 }, // centro de la Gameboy
+];
 
-const INTERACTABLES = buildInteractables();
-
-export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
+export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
   const [nearObjectId, setNearObjectId]   = useState(null);
   const [cameraOffsetX, setCameraOffsetX] = useState(0);
   const [cloudVariant, setCloudVariant]   = useState(false);
@@ -187,19 +186,13 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
     setCameraOffsetX(offset);
   }, [computeCamera]);
 
+  // ── Click en la Gameboy ────────────────────────────────────────────────────────
   const handleGameboyActivate = useCallback(() => {
     const sfx = new Audio(clickSfx);
     sfx.volume = 0.6;
     sfx.play().catch(() => {});
     onNavigate('about');
   }, [onNavigate]);
-
-  const handleEnterDoor = useCallback((projectId) => {
-    const sfx = new Audio(clickSfx);
-    sfx.volume = 0.6;
-    sfx.play().catch(() => {});
-    onEnterDoor?.(projectId);
-  }, [onEnterDoor]);
 
   return (
     <div className={styles.world} aria-label="Mundo del portafolio">
@@ -229,7 +222,8 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
             style={{
               left:           `${cloud.x + parallaxX}px`,
               top:            `${cloud.y}px`,
-              width:          `${128 * cloud.scale}px`,
+              width:          `${100 * cloud.scale}px`,
+              opacity:        cloud.opacity,
               animationDelay: `${cloud.delay}ms`,
             }}
           />
@@ -246,18 +240,18 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
           onActivate={handleGameboyActivate}
         />
 
+        {/* Zona central — cartel y flores */}
         <HomeZone />
 
-        <CinemaZone
-          nearObjectId={nearObjectId}
-          onEnterDoor={handleEnterDoor}
-        />
+        {/* Zona derecha — cine Pokémon */}
+        <CinemaZone />
 
         <Cat
           interactables={INTERACTABLES}
           onNearObject={handleNearObject}
           onLeaveObject={handleLeaveObject}
           onPositionChange={handlePositionChange}
+          selectedCat={selectedCat}
         />
       </div>
 

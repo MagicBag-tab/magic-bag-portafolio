@@ -1,0 +1,125 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 10, 46, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease-out both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: linear-gradient(135deg, #2a1a3e 0%, #1a0a2e 100%);
+  border: 4px solid #d4b8f0;
+  border-radius: 16px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 184, 240, 0.3);
+  max-width: 90%;
+}
+
+.title {
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  color: #fff;
+  text-shadow: 0 0 10px #d4b8f0;
+  margin: 0;
+  text-align: center;
+}
+
+.catsContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.catCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 3px solid transparent;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.catCard:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(212, 184, 240, 0.5);
+}
+
+.catCard.selected {
+  background: rgba(212, 184, 240, 0.15);
+  border-color: #d4b8f0;
+  box-shadow: 0 0 15px rgba(212, 184, 240, 0.4);
+  transform: translateY(-5px) scale(1.05);
+}
+
+.spriteContainer {
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  position: relative;
+}
+
+.sprite {
+  width: 64px;
+  height: 64px;
+  background-repeat: no-repeat;
+  background-size: auto;
+  image-rendering: pixelated;
+  /* Idle animation: 4 frames (row 1 is idle, assume frame 0 to 3) */
+  /* Actually, sprite sheet is typically animated with steps */
+  animation: spriteIdle 0.8s steps(4) infinite;
+}
+
+@keyframes spriteIdle {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -256px 0px; }
+}
+
+.catName {
+  font-family: var(--font-pixel);
+  font-size: 0.4rem;
+  color: #e0e0e0;
+}
+
+.startBtn {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  background: #d4b8f0;
+  color: #1a0a2e;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #9888cc;
+  margin-top: 10px;
+}
+
+.startBtn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #9888cc;
+  background: #e4c8ff;
+}
+
+.startBtn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #9888cc;
+}
