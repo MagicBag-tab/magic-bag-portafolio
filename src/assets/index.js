@@ -18,6 +18,19 @@ import flower1 from './flowers/flower-1.png';
 import flower2 from './flowers/flower-2.png';
 import flower3 from './flowers/flower-3.png';
 import star from './flowers/star.png';
+import flowerCosmo from './flowers/Cosmo.png';
+import flowerDaffodil from './flowers/Daffodil.png';
+import flowerDaisy from './flowers/Daisy.png';
+import flowerLavender from './flowers/Lavender.png';
+import flowerLily from './flowers/Lily.png';
+import flowerLilyValley from './flowers/LilyOfTheValley.png';
+import flowerOrchid from './flowers/Orchid.png';
+import flowerPansy from './flowers/Pansy.png';
+import flowerPoppy from './flowers/Poppy.png';
+import flowerRose from './flowers/Rose.png';
+import flowerSunflower from './flowers/Sunflower.png';
+import flowerTulip from './flowers/Tulip.png';
+import fallingStarSprite from './flowers/FallingStar_Sprites.png';
 import bgMusic1 from './audio/bg_music-1.wav';
 import jumpSfx from './audio/jump.wav';
 import clickSfx from './audio/click.wav';
@@ -46,6 +59,19 @@ export {
   flower2,
   flower3,
   star,
+  flowerCosmo,
+  flowerDaffodil,
+  flowerDaisy,
+  flowerLavender,
+  flowerLily,
+  flowerLilyValley,
+  flowerOrchid,
+  flowerPansy,
+  flowerPoppy,
+  flowerRose,
+  flowerSunflower,
+  flowerTulip,
+  fallingStarSprite,
   bgMusic1,
   jumpSfx,
   clickSfx,

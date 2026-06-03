@@ -10,6 +10,8 @@ import {
   OBJECT_IDS,
   WORLD_WIDTH,
 } from '../../constants/game';
+import FallingStar from './FallingStar';
+import FloatingBlocks from './FloatingBlocks';
 import {
   worldBackground,
   starField,
@@ -28,6 +30,18 @@ import {
   flower2,
   flower3,
   star,
+  flowerCosmo,
+  flowerDaffodil,
+  flowerDaisy,
+  flowerLavender,
+  flowerLily,
+  flowerLilyValley,
+  flowerOrchid,
+  flowerPansy,
+  flowerPoppy,
+  flowerRose,
+  flowerSunflower,
+  flowerTulip,
   bgMusic1,
   clickSfx,
 } from '../../assets/index';
@@ -130,14 +144,29 @@ const GRASS_PATCHES = [
 
 const FLOWER_PATCHES = [
   { img: flower1, x: 260, bottom: '24%', width: 84 },
-  { img: flower2, x: 780, bottom: '24%', width: 70 },
+  { img: flowerCosmo, x: 450, bottom: '23%', width: 64 },
+  { img: flowerDaffodil, x: 780, bottom: '24%', width: 70 },
+  { img: flowerDaisy, x: 950, bottom: '23.5%', width: 50 },
   { img: flower3, x: 1160, bottom: '24%', width: 78 },
+  { img: flowerLavender, x: 1400, bottom: '23%', width: 64 },
   { img: flower1, x: 1780, bottom: '24%', width: 92 },
+  { img: flowerLily, x: 2000, bottom: '24%', width: 70 },
+  { img: flowerLilyValley, x: 2150, bottom: '23.5%', width: 54 },
   { img: flower3, x: 2360, bottom: '24%', width: 74 },
+  { img: flowerOrchid, x: 2650, bottom: '23%', width: 68 },
+  { img: flowerPansy, x: 2820, bottom: '24%', width: 60 },
   { img: flower2, x: 3040, bottom: '24%', width: 86 },
+  { img: flowerPoppy, x: 3300, bottom: '23.5%', width: 58 },
+  { img: flowerRose, x: 3550, bottom: '24%', width: 72 },
   { img: flower1, x: 3740, bottom: '24%', width: 90 },
+  { img: flowerSunflower, x: 4100, bottom: '23%', width: 80 },
+  { img: flowerTulip, x: 4250, bottom: '24%', width: 66 },
   { img: flower3, x: 4380, bottom: '24%', width: 76 },
+  { img: flowerCosmo, x: 4700, bottom: '23.5%', width: 60 },
+  { img: flowerDaisy, x: 4950, bottom: '24%', width: 50 },
   { img: flower2, x: 5160, bottom: '24%', width: 84 },
+  { img: flowerLavender, x: 5400, bottom: '23%', width: 68 },
+  { img: flowerOrchid, x: 5800, bottom: '24%', width: 70 },
 ];
 
 const INTERACTABLES = [
@@ -280,6 +309,9 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
         className={styles.worldContent}
         style={{ transform: `translateX(${-cameraOffsetX}px)` }}
       >
+        <FallingStar />
+        <FloatingBlocks />
+        
         <GameboyZone
           isNear={nearObjectId === OBJECT_IDS.GAMEBOY}
           onActivate={handleGameboyActivate}

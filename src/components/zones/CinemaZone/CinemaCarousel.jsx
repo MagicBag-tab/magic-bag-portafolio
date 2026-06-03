@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { projects } from '../../../data/projects';
 import { CINEMA_CAROUSEL_MS } from '../../../constants/game';
-import { projectorFrame } from '../../../assets/index';
+import { projectorFrame, crispyTvFrame } from '../../../assets/index';
 import styles from './CinemaCarousel.module.css';
 
 const POKE_SPRITE = (id) =>
@@ -79,29 +79,33 @@ export default function CinemaCarousel() {
         </div>
       </div>
 
-      <div className={styles.projectCard} key={`card-${project.id}`}>
-        <h2 className={styles.cardTitle}>{project.title}</h2>
-        <div className={styles.divider} />
+      <div className={styles.tvArea}>
+        <img src={crispyTvFrame} alt="" aria-hidden="true" className={styles.tvFrameImg} />
+        
+        <div className={styles.projectCard} key={`card-${project.id}`}>
+          <h2 className={styles.cardTitle}>{project.title}</h2>
+          <div className={styles.divider} />
 
-        <p className={styles.cardDesc}>{project.shortDesc}</p>
+          <p className={styles.cardDesc}>{project.shortDesc}</p>
 
-        <div className={styles.techStack}>
-          {project.tech.map((t) => (
-            <span key={t} className={styles.badge}>{t}</span>
-          ))}
-        </div>
+          <div className={styles.techStack}>
+            {project.tech.map((t) => (
+              <span key={t} className={styles.badge}>{t}</span>
+            ))}
+          </div>
 
-        <div className={styles.cardLinks}>
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.linkBtn}>
-              GitHub
-            </a>
-          )}
-          {project.demo && (
-            <a href={project.demo} target="_blank" rel="noopener noreferrer" className={`${styles.linkBtn} ${styles.linkAccent}`}>
-              Demo
-            </a>
-          )}
+          <div className={styles.cardLinks}>
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.linkBtn}>
+                GitHub
+              </a>
+            )}
+            {project.demo && (
+              <a href={project.demo} target="_blank" rel="noopener noreferrer" className={`${styles.linkBtn} ${styles.linkAccent}`}>
+                Demo
+              </a>
+            )}
+          </div>
         </div>
 
         <div className={styles.guardian}>

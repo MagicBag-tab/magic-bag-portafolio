@@ -9,6 +9,10 @@ const SKILLS = [
   'Git',
   'Vite',
   'Figma',
+  'Docker',
+  'Go',
+  'Python',
+  'Vue',
 ];
 
 export default function GameboyScreen() {
@@ -29,7 +33,7 @@ export default function GameboyScreen() {
 
       <div className={styles.footer}>
         <a
-          href="https://github.com/tu-usuario"
+          href="https://github.com/MagicBag-tab"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}
@@ -38,7 +42,7 @@ export default function GameboyScreen() {
           GH
         </a>
         <a
-          href="https://linkedin.com"
+          href="https://www.linkedin.com/in/sarah-estrada-5347282b2/"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}
