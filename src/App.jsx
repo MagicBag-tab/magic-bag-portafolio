@@ -58,20 +58,17 @@ export default function App() {
 
   return (
     <>
+      {/* Cat select overlay — shown on top of the world until a cat is chosen */}
       {currentScreen === 'catSelect' && (
         <CatSelectScreen onSelect={handleCatSelect} />
       )}
 
-      {/*
-        GameWorld siempre montado si ya se seleccionó gato — preserva la posición.
-      */}
-      {currentScreen !== 'catSelect' && (
-        <GameWorld
-          onNavigate={handleNavigate}
-          soundEnabled={soundEnabled}
-          selectedCat={selectedCat}
-        />
-      )}
+      {/* GameWorld always rendered — 'black' cat as fallback until selection */}
+      <GameWorld
+        onNavigate={handleNavigate}
+        soundEnabled={soundEnabled}
+        selectedCat={selectedCat ?? 'black'}
+      />
 
       {/* ── Sala de detalle del proyecto ── */}
       {currentScreen === 'projectDetail' && selectedProject && (

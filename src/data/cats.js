@@ -12,21 +12,21 @@ export const CATS = [
     name: 'Gato negro',
     sprite: catSpriteBlack,
     accent: '#d4b8f0',
-    preview: { row: 25, frames: 5, fps: 6 },
+    preview: { row: 4, frames: 6, fps: 8 },
   },
   {
     id: 'ginger',
     name: 'Gato naranja',
     sprite: catSpriteGinger,
     accent: '#f0b36a',
-    preview: { row: 25, frames: 5, fps: 6 },
+    preview: { row: 4, frames: 6, fps: 8 },
   },
   {
     id: 'white',
     name: 'Gato blanco',
     sprite: catSpriteWhite,
     accent: '#f8e9ff',
-    preview: { row: 25, frames: 5, fps: 6 },
+    preview: { row: 4, frames: 6, fps: 8 },
   },
 ];
 

@@ -2,20 +2,20 @@
 
 Este es el portafolio interactivo de **Sarah Rachel Estrada Bonilla**. Un mundo en 2D pixel art donde puedes explorar y conocer más sobre su experiencia, proyectos y tecnologías.
 
-## 🎮 Controles del Juego
+##  Controles del Juego
 
 - **Izquierda / Derecha**: Mover al personaje.
 - **Espacio**: Saltar.
 - **Shift**: Correr.
 - **Click o Enter**: Interactuar con elementos brillantes (Gameboy, TV).
 
-## 🚀 Zonas del Mundo
+##  Zonas del Mundo
 
 - **Inicio**: El gatito aparece aquí junto a un cartel flotante y una TV interactiva que abre la pestaña de "Sobre Mí".
 - **Tech / Proyectos**: Un área con una gran Gameboy retro flotante, que al interactuar abre el apartado de proyectos.
 - **Cine Pokémon**: Una pantalla grande al aire libre proyectando imágenes (screenshots) de cada proyecto, acompañada de público Pokémon.
 
-## 🛠️ Tecnologías del Proyecto
+##  Tecnologías del Proyecto
 
 Este portafolio ha sido construido con:
 - React (Vite)
@@ -23,7 +23,7 @@ Este portafolio ha sido construido con:
 - Lógica custom en Hooks para el motor físico del mundo (scroll parallax, gravedad, colisiones, cámara).
 - Assets pixel art curados (pipoya, itch.io).
 
-## 💻 Sobre la Creadora
+##  Sobre la Creadora
 
 Sarah es estudiante de tercer año de Ingeniería en Ciencias de la Computación en la Universidad del Valle de Guatemala.
 **Tecnologías:** `HTML`, `CSS`, `JavaScript`, `React`, `Vue`, `Go`, `Python`, `C++`, `TypeScript`, `PostgreSQL`, `Docker`.

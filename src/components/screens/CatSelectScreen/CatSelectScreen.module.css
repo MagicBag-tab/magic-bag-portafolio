@@ -1,8 +1,9 @@
+/* ── Overlay — same style as Menu modal ── */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(26, 10, 46, 0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(10, 4, 22, 0.82);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,118 +12,114 @@
 }
 
 .modal {
-  background: linear-gradient(135deg, #2a1a3e 0%, #1a0a2e 100%);
-  border: 4px solid #d4b8f0;
-  border-radius: 16px;
-  padding: 40px;
+  background: linear-gradient(160deg, rgba(42, 26, 62, 0.97) 0%, rgba(22, 10, 38, 0.99) 100%);
+  border: 3px solid #d4b8f0;
+  border-radius: 0;
+  padding: 40px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 184, 240, 0.3);
-  max-width: min(92vw, 760px);
+  gap: 32px;
+  box-shadow:
+    0 0 0 1px #9888cc,
+    0 0 80px rgba(152, 136, 204, 0.4),
+    0 24px 60px rgba(0, 0, 0, 0.8);
+  max-width: min(96vw, 860px);
 }
 
 .title {
   font-family: var(--font-pixel);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #fff;
-  text-shadow: 0 0 10px #d4b8f0;
+  text-shadow: 0 0 16px #d4b8f0, 0 0 32px rgba(212, 184, 240, 0.4);
   margin: 0;
   text-align: center;
+  letter-spacing: 0.05em;
 }
 
+/* ── Cat cards ── */
 .catsContainer {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .catCard {
   appearance: none;
-  background: rgba(255, 255, 255, 0.05);
-  border: 3px solid transparent;
-  border-radius: 12px;
-  padding: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px solid rgba(212, 184, 240, 0.2);
+  border-radius: 0;
+  padding: 20px 24px 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
   color: inherit;
+  min-width: 160px;
 }
 
 .catCard:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-color: color-mix(in srgb, var(--cat-accent) 60%, transparent);
+  transform: translateY(-4px);
 }
 
 .catCard.selected {
-  background: color-mix(in srgb, var(--cat-accent) 20%, transparent);
+  background: color-mix(in srgb, var(--cat-accent) 15%, transparent);
   border-color: var(--cat-accent);
-  box-shadow: 0 0 15px color-mix(in srgb, var(--cat-accent) 45%, transparent);
-  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--cat-accent) 40%, transparent);
+  transform: translateY(-6px);
 }
 
-.spriteContainer {
-  width: 128px;
-  height: 128px;
+/* ── Sprite preview ── */
+.previewWrapper {
+  width: 160px;
+  height: 196px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: -20px;
   overflow: hidden;
-  display: block;
-  position: relative;
-}
-
-.sprite {
-  width: 128px;
-  height: 128px;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: 0 var(--preview-y);
   image-rendering: pixelated;
-  animation-name: spritePreview;
-  animation-iteration-count: infinite;
 }
 
 .catName {
   font-family: var(--font-pixel);
-  font-size: 0.4rem;
-  color: #e0e0e0;
+  font-size: 0.38rem;
+  color: #e0d0ff;
+  letter-spacing: 0.05em;
 }
 
+/* ── Start button ── */
 .startBtn {
   font-family: var(--font-pixel);
   font-size: 0.5rem;
   background: #d4b8f0;
   color: #1a0a2e;
   border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
+  border-radius: 0;
+  padding: 14px 32px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 0 #9888cc;
-  margin-top: 10px;
+  transition: all 0.15s ease;
+  box-shadow: 0 5px 0 #7a60a0;
+  letter-spacing: 0.04em;
 }
 
 .startBtn:hover {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 #9888cc;
+  box-shadow: 0 3px 0 #7a60a0;
   background: #e4c8ff;
 }
 
 .startBtn:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 #9888cc;
-}
-
-@keyframes spritePreview {
-  from { background-position: 0 var(--preview-y); }
-  to { background-position: var(--preview-end-x) var(--preview-y); }
+  transform: translateY(5px);
+  box-shadow: 0 0 0 #7a60a0;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
 }
