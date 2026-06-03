@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { projects } from '../../../data/projects';
 import { CINEMA_CAROUSEL_MS } from '../../../constants/game';
-import { cinemaScreenFrame } from '../../../assets/index';
+import { projectorFrame } from '../../../assets/index';
 import styles from './CinemaCarousel.module.css';
 
 const POKE_SPRITE = (id) =>
@@ -38,15 +38,13 @@ export default function CinemaCarousel() {
 
   return (
     <div className={styles.carouselWrapper}>
-      <div className={styles.screenArea}>
-        <div className={styles.projectorBeam} aria-hidden="true" />
-
-        <div className={styles.tvFrame}>
+      <div className={styles.projectorArea}>
+        <div className={styles.projectorFrame}>
           <img
-            src={cinemaScreenFrame}
+            src={projectorFrame}
             alt=""
             aria-hidden="true"
-            className={styles.tvImage}
+            className={styles.projectorImage}
           />
 
           <div className={styles.projectViewport}>

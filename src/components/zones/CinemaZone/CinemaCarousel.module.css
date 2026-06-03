@@ -2,39 +2,25 @@
   position: absolute;
   display: flex;
   align-items: flex-end;
-  gap: 34px;
+  gap: 36px;
   pointer-events: all;
   z-index: 5;
 }
 
-.screenArea {
+.projectorArea {
   position: relative;
   width: 560px;
-  aspect-ratio: 1;
+  aspect-ratio: 1260 / 1420;
 }
 
-.projectorBeam {
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  width: 78px;
-  height: 120px;
-  transform: translateX(-50%);
-  background: linear-gradient(to bottom, rgba(255, 248, 200, 0) 0%, rgba(255, 248, 200, 0.16) 100%);
-  clip-path: polygon(24% 0%, 76% 0%, 100% 100%, 0% 100%);
-  animation: beamFlicker 4s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.tvFrame {
+.projectorFrame {
   position: relative;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 16px 18px rgba(53, 24, 72, 0.28));
+  filter: drop-shadow(0 16px 0 rgba(24, 18, 30, 0.22));
 }
 
-.tvImage {
+.projectorImage {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -47,10 +33,10 @@
 
 .projectViewport {
   position: absolute;
-  left: 15.4%;
-  top: 25.4%;
-  width: 69%;
-  height: 45.8%;
+  left: 6.4%;
+  top: 7.7%;
+  width: 87.8%;
+  height: 60.6%;
   overflow: hidden;
   background: #08060d;
   z-index: 3;
@@ -87,7 +73,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.78);
+  background: rgba(0, 0, 0, 0.82);
   padding: 8px 12px;
   display: flex;
   align-items: center;
@@ -118,8 +104,8 @@
 .dot {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
   border: none;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.35);
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
@@ -133,37 +119,37 @@
 
 .projectCard {
   width: 300px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
-  border: 3px solid rgba(212, 184, 240, 0.6);
-  border-radius: 12px;
+  background: rgba(22, 18, 28, 0.88);
+  border: 3px solid #8f8794;
+  border-radius: 0;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 8px 8px 0 rgba(24, 18, 30, 0.28);
   animation: slideInFade 0.4s ease-out both;
   position: relative;
-  margin-bottom: 72px;
+  margin-bottom: 200px;
+  image-rendering: pixelated;
 }
 
 .cardTitle {
   font-family: var(--font-pixel);
   font-size: 0.6rem;
-  color: #2a1a3e;
+  color: #f3e7ff;
   margin: 0;
 }
 
 .divider {
   width: 100%;
   height: 2px;
-  background: rgba(212, 184, 240, 0.5);
+  background: #8f8794;
 }
 
 .cardDesc {
   font-family: var(--font-main);
   font-size: 0.85rem;
-  color: #4a3a5e;
+  color: #d6cfdd;
   line-height: 1.4;
   margin: 0;
 }
@@ -177,11 +163,11 @@
 .badge {
   font-family: var(--font-pixel);
   font-size: 0.28rem;
-  background: rgba(212, 184, 240, 0.25);
-  color: #5a3a7e;
-  border: 1px solid rgba(212, 184, 240, 0.5);
-  border-radius: 4px;
-  padding: 3px 6px;
+  background: #312637;
+  color: #f5d8f8;
+  border: 1px solid #8f8794;
+  border-radius: 0;
+  padding: 4px 6px;
 }
 
 .cardLinks {
@@ -193,30 +179,25 @@
 .linkBtn {
   font-family: var(--font-pixel);
   font-size: 0.35rem;
-  color: #5a3a7e;
-  background: rgba(255, 255, 255, 0.5);
-  border: 2px solid rgba(212, 184, 240, 0.8);
-  border-radius: 8px;
+  color: #f5d8f8;
+  background: #312637;
+  border: 2px solid #8f8794;
+  border-radius: 0;
   padding: 8px 12px;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: transform 0.2s, background 0.2s;
   flex: 1;
   text-align: center;
 }
 
 .linkBtn:hover {
-  background: #f0e6fa;
+  background: #4a344f;
   transform: translateY(-2px);
 }
 
 .linkAccent {
-  background: #d4b8f0;
-  color: #1a0a2e;
-  border-color: #b890e0;
-}
-
-.linkAccent:hover {
-  background: #e4c8ff;
+  background: #6a456f;
+  color: #fff6ff;
 }
 
 .guardian {
@@ -233,22 +214,17 @@
   width: 64px;
   height: 64px;
   image-rendering: pixelated;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 4px 0 rgba(0, 0, 0, 0.25));
 }
 
 .guardianLabel {
   font-family: var(--font-pixel);
   font-size: 0.25rem;
-  color: #2a1a3e;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 2px 6px;
-  border-radius: 8px;
+  color: #f5d8f8;
+  background: #16121c;
+  padding: 3px 6px;
+  border: 1px solid #8f8794;
   margin-top: -8px;
-}
-
-@keyframes beamFlicker {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 0.9; }
 }
 
 @keyframes fadeIn {

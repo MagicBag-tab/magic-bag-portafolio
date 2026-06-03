@@ -1,49 +1,33 @@
-
+import styles from './GameboyScreen.module.css';
 
 const SKILLS = [
-  { name: 'React',      icon: 'devicon-react-original',        color: '#61dafb' },
-  { name: 'JS',         icon: 'devicon-javascript-plain',       color: '#f7df1e' },
-  { name: 'CSS',        icon: 'devicon-css3-plain',             color: '#264de4' },
-  { name: 'HTML',       icon: 'devicon-html5-plain',            color: '#e34f26' },
-  { name: 'Node',       icon: 'devicon-nodejs-plain',           color: '#339933' },
-  { name: 'Git',        icon: 'devicon-git-plain',              color: '#f05032' },
-  { name: 'Vite',       icon: 'devicon-vitejs-plain',           color: '#646cff' },
-  { name: 'Figma',      icon: 'devicon-figma-plain',            color: '#f24e1e' },
+  'React',
+  'JavaScript',
+  'CSS',
+  'HTML',
+  'Node',
+  'Git',
+  'Vite',
+  'Figma',
 ];
-
-import styles from './GameboyScreen.module.css';
 
 export default function GameboyScreen() {
   return (
     <div className={styles.screen}>
-
       <div className={styles.header}>
-        <div className={styles.avatar} aria-label="Avatar">
-          <span>✨</span>
-        </div>
-        <div className={styles.nameBlock}>
-          <p className={styles.name}>Sarah</p>
-          <p className={styles.role}>Dev ♡</p>
-        </div>
+        <span className={styles.prompt}>TECH</span>
+        <span className={styles.cursor} />
       </div>
 
-      <div className={styles.divider} />
-
-      <p className={styles.sectionLabel}>SKILLS</p>
-      <div className={styles.skillsGrid}>
+      <div className={styles.grid}>
         {SKILLS.map((skill) => (
-          <div key={skill.name} className={styles.skill} title={skill.name}>
-            <i
-              className={`${skill.icon} colored`}
-              style={{ fontSize: '14px', color: skill.color }}
-            />
-          </div>
+          <span key={skill} className={styles.skill}>
+            {skill}
+          </span>
         ))}
       </div>
 
-      <div className={styles.divider} />
-
-      <div className={styles.links}>
+      <div className={styles.footer}>
         <a
           href="https://github.com/tu-usuario"
           target="_blank"

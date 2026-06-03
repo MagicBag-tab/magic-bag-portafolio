@@ -21,8 +21,7 @@ export const SPRITE_COLS        = 14;
 export const SPRITE_SCALE       = 2;
 
 export const getFloorY = () => {
-  const groundTop = window.innerHeight * 0.76;
-  return groundTop - FRAME_SIZE * SPRITE_SCALE;
+  return window.innerHeight * 0.76;
 };
 
 export const CLIFF_EDGE_X = 1580;
@@ -42,15 +41,16 @@ export const CAT_ANIMATIONS = {
 
 export const PARALLAX_SPEEDS = {
   sky:          0.0,
-  mountains:    0.45,
-  groundFlower: 0.85,
+  stars:        0.04,
+  cloudShadows: 0.14,
+  clouds:       0.24,
   ground:       1.0,
 };
 
-export const GAMEBOY_X               = 720;
+export const GAMEBOY_X               = 560;
 export const GAMEBOY_Y               = 130;
-export const GAMEBOY_WIDTH           = 430;
-export const GAMEBOY_HEIGHT          = 376;
+export const GAMEBOY_WIDTH           = 660;
+export const GAMEBOY_HEIGHT          = 446;
 export const GAMEBOY_SCREEN_W        = 160;
 export const GAMEBOY_SCREEN_H        = 144;
 

@@ -12,12 +12,6 @@
   top: 0;
   left: 0;
   height: 100%;
-  background: linear-gradient(
-    to right,
-    #c8b0e8 0%,
-    #d8c0f0 48%,
-    transparent 100%
-  );
   pointer-events: none;
 }
 
@@ -25,7 +19,7 @@
   position: absolute;
   cursor: pointer;
   pointer-events: all;
-  animation: floatGameboy 3.2s ease-in-out infinite;
+  animation: floatComputer 3.2s ease-in-out infinite;
   transition: filter 0.3s ease;
 }
 
@@ -33,7 +27,7 @@
   filter: brightness(1.08);
 }
 
-.gameboyFrame {
+.computerFrame {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -41,26 +35,25 @@
   object-fit: contain;
   image-rendering: pixelated;
   z-index: 1;
-  filter: drop-shadow(0 12px 18px rgba(72, 28, 88, 0.22));
+  filter: drop-shadow(0 12px 18px rgba(31, 19, 38, 0.3));
 }
 
 .screenSlot {
   position: absolute;
-  left: 27.6%;
-  top: 13.8%;
-  width: 46%;
-  height: 38%;
+  left: 10.6%;
+  top: 19.7%;
+  width: 46.2%;
+  height: 61%;
   overflow: hidden;
-  background: #9bbc0f;
+  background: #05070d;
   z-index: 2;
   image-rendering: pixelated;
 }
 
 .glow {
   position: absolute;
-  inset: -12px;
-  border-radius: 24px;
-  background: radial-gradient(ellipse at center, rgba(255, 210, 238, 0.55) 0%, transparent 70%);
+  inset: -8px;
+  background: radial-gradient(ellipse at 32% 46%, rgba(176, 218, 255, 0.28) 0%, transparent 64%);
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
@@ -72,12 +65,12 @@
   opacity: 1;
 }
 
-@keyframes floatGameboy {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-14px) rotate(1deg); }
+@keyframes floatComputer {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes glowPulse {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.05); opacity: 0.9; }
+  0%, 100% { transform: scale(1); opacity: 0.45; }
+  50% { transform: scale(1.04); opacity: 0.8; }
 }

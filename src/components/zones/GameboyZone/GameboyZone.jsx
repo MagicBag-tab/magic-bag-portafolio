@@ -6,7 +6,7 @@ import {
   GAMEBOY_HEIGHT,
   CLIFF_EDGE_X,
 } from '../../../constants/game';
-import { gameboyFrame } from '../../../assets/index';
+import { computerFrame } from '../../../assets/index';
 import styles from './GameboyZone.module.css';
 
 export default function GameboyZone({ isNear = false, onActivate }) {
@@ -28,16 +28,16 @@ export default function GameboyZone({ isNear = false, onActivate }) {
         onClick={onActivate}
         role="button"
         tabIndex={0}
-        aria-label="Ver sobre mi"
+        aria-label="Ver tecnologias"
         onKeyDown={(e) => e.key === 'Enter' && onActivate?.()}
       >
-        <Tooltip label="Sobre mi" visible={isNear} />
+        <Tooltip label="Tecnologias" visible={isNear} />
 
         <img
-          src={gameboyFrame}
+          src={computerFrame}
           alt=""
           aria-hidden="true"
-          className={styles.gameboyFrame}
+          className={styles.computerFrame}
         />
 
         <div className={styles.screenSlot}>
