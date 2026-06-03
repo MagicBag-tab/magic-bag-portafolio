@@ -15,6 +15,8 @@ import {
   starField,
   cloudShadows,
   cloudLayer,
+  purpleBackground,
+  denseStars,
   tileGrassLeft,
   tileGrassTop,
   tileGrassRight,
@@ -22,6 +24,9 @@ import {
   grassPatch1,
   grassPatch2,
   grassPatch3,
+  flower1,
+  flower2,
+  flower3,
   star,
   bgMusic1,
   clickSfx,
@@ -41,6 +46,19 @@ const PARALLAX_LAYERS = [
     id: 'stars',
     speed: 0.04,
     imageUrl: starField,
+    height: '100%',
+    zIndex: 2,
+    style: {
+      top: 0,
+      backgroundSize: 'auto 100%',
+      backgroundRepeat: 'repeat-x',
+      backgroundPosition: 'top',
+    },
+  },
+  {
+    id: 'dense-stars',
+    speed: 0.06,
+    imageUrl: denseStars,
     height: '100%',
     zIndex: 2,
     style: {
@@ -76,18 +94,50 @@ const PARALLAX_LAYERS = [
       backgroundPosition: 'center',
     },
   },
+  {
+    id: 'purple-background',
+    speed: 0.18,
+    imageUrl: purpleBackground,
+    height: '52%',
+    zIndex: 5,
+    style: {
+      bottom: '24%',
+      top: 'auto',
+      backgroundSize: 'auto 100%',
+      backgroundRepeat: 'repeat-x',
+      backgroundPosition: 'bottom',
+    },
+  },
 ];
 
 const GRASS_PATCHES = [
-  { img: grassPatch1, x: 420, bottom: '24%', width: 34 },
+  { img: grassPatch1, x: 120, bottom: '24%', width: 34 },
+  { img: grassPatch2, x: 360, bottom: '24.5%', width: 42 },
+  { img: grassPatch3, x: 620, bottom: '24%', width: 34 },
   { img: grassPatch2, x: 960, bottom: '24.5%', width: 42 },
+  { img: grassPatch1, x: 1280, bottom: '24%', width: 34 },
   { img: grassPatch3, x: 1510, bottom: '24%', width: 34 },
-  { img: grassPatch2, x: 2140, bottom: '24.5%', width: 42 },
+  { img: grassPatch2, x: 1840, bottom: '24.5%', width: 42 },
+  { img: grassPatch1, x: 2140, bottom: '24%', width: 34 },
+  { img: grassPatch3, x: 2460, bottom: '24%', width: 34 },
   { img: grassPatch1, x: 2870, bottom: '24%', width: 34 },
   { img: grassPatch3, x: 3420, bottom: '24%', width: 34 },
+  { img: grassPatch2, x: 3920, bottom: '24.5%', width: 42 },
   { img: grassPatch2, x: 4170, bottom: '24.5%', width: 42 },
   { img: grassPatch1, x: 4920, bottom: '24%', width: 34 },
   { img: grassPatch3, x: 5580, bottom: '24%', width: 34 },
+];
+
+const FLOWER_PATCHES = [
+  { img: flower1, x: 260, bottom: '24%', width: 84 },
+  { img: flower2, x: 780, bottom: '24%', width: 70 },
+  { img: flower3, x: 1160, bottom: '24%', width: 78 },
+  { img: flower1, x: 1780, bottom: '24%', width: 92 },
+  { img: flower3, x: 2360, bottom: '24%', width: 74 },
+  { img: flower2, x: 3040, bottom: '24%', width: 86 },
+  { img: flower1, x: 3740, bottom: '24%', width: 90 },
+  { img: flower3, x: 4380, bottom: '24%', width: 76 },
+  { img: flower2, x: 5160, bottom: '24%', width: 84 },
 ];
 
 const INTERACTABLES = [
@@ -184,6 +234,19 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
             src={patch.img}
             alt=""
             className={styles.grassPatch}
+            style={{
+              left: `${patch.x}px`,
+              bottom: patch.bottom,
+              width: `${patch.width}px`,
+            }}
+          />
+        ))}
+        {FLOWER_PATCHES.map((patch, index) => (
+          <img
+            key={`flower-${patch.x}-${index}`}
+            src={patch.img}
+            alt=""
+            className={styles.flowerPatch}
             style={{
               left: `${patch.x}px`,
               bottom: patch.bottom,

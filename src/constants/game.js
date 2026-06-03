@@ -24,7 +24,7 @@ export const getFloorY = () => {
   return window.innerHeight * 0.76;
 };
 
-export const CLIFF_EDGE_X = 1580;
+export const CLIFF_EDGE_X = 0;
 
 export const CAMERA_LERP     = 0.1;
 export const CAMERA_OFFSET_X = 0.4;
@@ -32,11 +32,11 @@ export const CAMERA_OFFSET_X = 0.4;
 export const NEAR_THRESHOLD = 110;
 
 export const CAT_ANIMATIONS = {
-  idle: { row: 25, frames: 5,  fps: 6  },
-  walk: { row: 32, frames: 11, fps: 12 },
-  run:  { row: 34, frames: 11, fps: 18 },
-  jump: { row: 63, frames: 5,  fps: 10 },
-  land: { row: 64, frames: 5,  fps: 10 },
+  idle: { row: 0, frames: 4,  fps: 6  },
+  walk: { row: 1, frames: 8,  fps: 12 },
+  run:  { row: 2, frames: 8,  fps: 16 },
+  jump: { row: 3, frames: 4,  fps: 10 },
+  land: { row: 4, frames: 3,  fps: 10 },
 };
 
 export const PARALLAX_SPEEDS = {
@@ -47,18 +47,18 @@ export const PARALLAX_SPEEDS = {
   ground:       1.0,
 };
 
-export const GAMEBOY_X               = 560;
+export const GAMEBOY_X               = 160;
 export const GAMEBOY_Y               = 130;
-export const GAMEBOY_WIDTH           = 660;
-export const GAMEBOY_HEIGHT          = 446;
+export const GAMEBOY_WIDTH           = 640;
+export const GAMEBOY_HEIGHT          = 456;
 export const GAMEBOY_SCREEN_W        = 160;
 export const GAMEBOY_SCREEN_H        = 144;
 
 export const GAMEBOY_SCREEN_OFFSET_X = 50;
 export const GAMEBOY_SCREEN_OFFSET_Y = 62;
 
-export const CINEMA_SCREEN_X    = 3420;
-export const CINEMA_SCREEN_Y    = 60;
+export const CINEMA_SCREEN_X    = 3580;
+export const CINEMA_SCREEN_Y    = 86;
 export const CINEMA_SCREEN_W    = 520;
 export const CINEMA_SCREEN_H    = 300;
 export const CINEMA_CAROUSEL_MS = 5000;

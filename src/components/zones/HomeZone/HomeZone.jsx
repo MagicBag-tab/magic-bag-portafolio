@@ -1,24 +1,16 @@
+import { crispyTvFrame } from '../../../assets/index';
 import styles from './HomeZone.module.css';
 
-const SIGNPOST_X = 2200;
+const TV_X = 2120;
 
 export default function HomeZone() {
   return (
     <div className={styles.zone}>
       <div
-        className={styles.signpost}
-        style={{ left: `${SIGNPOST_X}px` }}
-        aria-label="Senal de direccion"
+        className={styles.floatingText}
+        style={{ left: `2200px` }}
       >
-        <div className={styles.pole} />
-
-        <div className={`${styles.sign} ${styles.signLeft}`}>
-          <span>Tech</span>
-        </div>
-
-        <div className={`${styles.sign} ${styles.signRight}`}>
-          <span>Cine</span>
-        </div>
+        Magic Bag Portlofio
       </div>
     </div>
   );

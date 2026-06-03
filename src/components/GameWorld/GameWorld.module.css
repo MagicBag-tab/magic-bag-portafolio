@@ -32,6 +32,13 @@
   filter: drop-shadow(0 3px 0 rgba(60, 54, 72, 0.18));
 }
 
+.flowerPatch {
+  position: absolute;
+  image-rendering: pixelated;
+  transform: translateY(8px);
+  filter: drop-shadow(0 4px 0 rgba(60, 54, 72, 0.2));
+}
+
 .groundLayer {
   position: absolute;
   left: 0;

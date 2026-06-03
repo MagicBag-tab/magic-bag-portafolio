@@ -5,6 +5,8 @@ import worldBackground from './backgrounds/1.png';
 import starField from './backgrounds/2.png';
 import cloudShadows from './backgrounds/3.png';
 import cloudLayer from './backgrounds/4.png';
+import purpleBackground from './backgrounds/5.png';
+import denseStars from './backgrounds/6.png';
 import tileGrassLeft from './backgrounds/tile1.png';
 import tileGrassTop from './backgrounds/tile2.png';
 import tileGrassRight from './backgrounds/tile3.png';
@@ -21,6 +23,7 @@ import jumpSfx from './audio/jump.wav';
 import clickSfx from './audio/click.wav';
 import computerFrame from './screens/Computer.png';
 import projectorFrame from './screens/ProjectorScreenClean1000.png';
+import crispyTvFrame from './screens/CrispyTV1000.png';
 
 export {
   catSpriteBlack,
@@ -30,6 +33,8 @@ export {
   starField,
   cloudShadows,
   cloudLayer,
+  purpleBackground,
+  denseStars,
   tileGrassLeft,
   tileGrassTop,
   tileGrassRight,
@@ -46,4 +51,5 @@ export {
   clickSfx,
   computerFrame,
   projectorFrame,
+  crispyTvFrame,
 };

@@ -9,7 +9,7 @@
 
 .projectorArea {
   position: relative;
-  width: 560px;
+  width: 480px;
   aspect-ratio: 1260 / 1420;
 }
 
@@ -129,7 +129,7 @@
   box-shadow: 8px 8px 0 rgba(24, 18, 30, 0.28);
   animation: slideInFade 0.4s ease-out both;
   position: relative;
-  margin-bottom: 200px;
+  margin-bottom: 170px;
   image-rendering: pixelated;
 }
 
