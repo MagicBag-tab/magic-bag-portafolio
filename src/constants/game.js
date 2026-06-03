@@ -64,11 +64,12 @@ export const CINEMA_SCREEN_H    = 300;
 export const CINEMA_CAROUSEL_MS = 5000;
 
 export const POKEMON_AUDIENCE = [
-  { id: 'snorlax',   pokeId: 143, x: 3620, scale: 2.2, delay: 0,    projectId: null },
-  { id: 'pikachu',   pokeId: 25,  x: 3740, scale: 1.6, delay: 600,  projectId: 1    },
-  { id: 'eevee',     pokeId: 133, x: 3840, scale: 1.5, delay: 1200, projectId: 2    },
-  { id: 'gengar',    pokeId: 94,  x: 3950, scale: 1.7, delay: 400,  projectId: null },
-  { id: 'bulbasaur', pokeId: 1,   x: 4060, scale: 1.5, delay: 900,  projectId: 3    },
+  { id: 'pikachu',   pokeId: 25,  x: 3620, scale: 1.6, delay: 600,  projectId: 1 },
+  { id: 'eevee',     pokeId: 133, x: 3740, scale: 1.5, delay: 1200, projectId: 2 },
+  { id: 'bulbasaur', pokeId: 1,   x: 3840, scale: 1.5, delay: 900,  projectId: 3 },
+  { id: 'snorlax',   pokeId: 143, x: 3950, scale: 2.2, delay: 0,    projectId: 4 },
+  { id: 'gengar',    pokeId: 94,  x: 4060, scale: 1.7, delay: 400,  projectId: 5 },
+  { id: 'pikachu2',  pokeId: 25,  x: 4160, scale: 1.6, delay: 200,  projectId: 6 },
 ];
 
 export const OBJECT_IDS = {
