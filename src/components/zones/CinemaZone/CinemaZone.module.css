@@ -10,5 +10,6 @@
 
 .cinemaScreenPos {
   position: absolute;
+  bottom: 23%;
   pointer-events: all;
 }

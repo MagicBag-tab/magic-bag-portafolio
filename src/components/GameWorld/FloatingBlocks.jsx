@@ -3,19 +3,22 @@ import {
   tileGrassTop,
   tileGrassRight,
   tileGroundFill,
+  flowerCosmo,
+  flowerDaffodil,
+  flowerDaisy,
+  flowerLavender,
+  flowerPansy,
+  flowerTulip,
 } from '../../assets/index';
 import styles from './FloatingBlocks.module.css';
 
 const BLOCKS = [
-  { id: 1, x: 360, y: 360, width: 3 },
-  { id: 2, x: 760, y: 250, width: 4 },
-  { id: 3, x: 1180, y: 330, width: 2 },
-  { id: 4, x: 1880, y: 270, width: 3 },
-  { id: 5, x: 2580, y: 300, width: 5 },
-  { id: 6, x: 3120, y: 190, width: 3 },
-  { id: 7, x: 3920, y: 260, width: 4 },
-  { id: 8, x: 4560, y: 220, width: 4 },
-  { id: 9, x: 5240, y: 320, width: 3 },
+  { id: 1, x: 1880, y: 270, width: 3, flowers: [flowerCosmo, flowerDaisy] },
+  { id: 2, x: 2520, y: 322, width: 5, flowers: [flowerDaffodil, flowerPansy] },
+  { id: 3, x: 3160, y: 205, width: 3, flowers: [flowerLavender] },
+  { id: 4, x: 3920, y: 276, width: 4, flowers: [flowerTulip, flowerDaisy] },
+  { id: 5, x: 4580, y: 236, width: 4, flowers: [flowerCosmo] },
+  { id: 6, x: 5260, y: 328, width: 3, flowers: [flowerPansy, flowerLavender] },
 ];
 
 export default function FloatingBlocks() {
@@ -43,6 +46,17 @@ export default function FloatingBlocks() {
             className={styles.platformShadow}
             style={{ backgroundImage: `url(${tileGroundFill})` }}
           />
+          <div className={styles.platformFlowers}>
+            {block.flowers.map((flower, index) => (
+              <img
+                key={`${block.id}-flower-${index}`}
+                src={flower}
+                alt=""
+                className={styles.platformFlower}
+                style={{ left: `${56 + index * 70}px` }}
+              />
+            ))}
+          </div>
         </div>
       ))}
     </div>

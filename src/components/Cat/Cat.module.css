@@ -1,12 +1,15 @@
 .cat {
   position: absolute;
-
   transform-origin: bottom center;
   pointer-events: none;
-  z-index: var(--z-cat);
-
+  z-index: 80;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  filter:
+    brightness(1.65)
+    contrast(1.25)
+    drop-shadow(0 5px 0 rgba(20, 14, 28, 0.45))
+    drop-shadow(0 0 8px rgba(255, 235, 255, 0.45));
 }
 
 .placeholder {

@@ -1,5 +1,5 @@
 .carouselWrapper {
-  position: absolute;
+  position: relative;
   display: flex;
   align-items: flex-end;
   gap: 28px;
@@ -119,9 +119,9 @@
 
 .tvArea {
   position: relative;
-  width: 520px;
+  width: 420px;
   aspect-ratio: 1350 / 1280;
-  margin-bottom: 34px;
+  margin-bottom: 0;
   filter: drop-shadow(10px 14px 0 rgba(24, 18, 30, 0.2));
 }
 
@@ -147,7 +147,7 @@
     #08080d;
   border: none;
   border-radius: 0;
-  padding: 24px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -158,7 +158,7 @@
 
 .cardTitle {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.42rem;
   line-height: 1.5;
   color: #f3e7ff;
   margin: 0;
@@ -173,7 +173,7 @@
 
 .cardShort {
   font-family: var(--font-pixel);
-  font-size: 0.26rem;
+  font-size: 0.22rem;
   line-height: 1.6;
   color: color-mix(in srgb, var(--accent) 74%, #fff);
   margin: 0;
@@ -181,7 +181,7 @@
 
 .cardDesc {
   font-family: var(--font-main);
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   color: #d6cfdd;
   line-height: 1.35;
   margin: 0;
@@ -196,7 +196,7 @@
 
 .badge {
   font-family: var(--font-pixel);
-  font-size: 0.24rem;
+  font-size: 0.2rem;
   background: #312637;
   color: #f5d8f8;
   border: 1px solid #8f8794;
@@ -212,7 +212,7 @@
 
 .linkBtn {
   font-family: var(--font-pixel);
-  font-size: 0.3rem;
+  font-size: 0.24rem;
   color: #f5d8f8;
   background: #312637;
   border: 2px solid #8f8794;
@@ -236,8 +236,8 @@
 
 .guardian {
   position: absolute;
-  top: -40px;
-  right: -20px;
+  top: -46px;
+  right: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;

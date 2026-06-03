@@ -9,6 +9,9 @@ import {
 import { computerFrame } from '../../../assets/index';
 import styles from './GameboyZone.module.css';
 
+const POKE_SPRITE_URL = (id) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
 export default function GameboyZone({ isNear = false, onActivate }) {
   return (
     <div className={styles.zone}>
@@ -32,6 +35,10 @@ export default function GameboyZone({ isNear = false, onActivate }) {
         onKeyDown={(e) => e.key === 'Enter' && onActivate?.()}
       >
         <Tooltip label="Tecnologias" visible={isNear} />
+
+        <div className={styles.computerPokemon} aria-hidden="true">
+          <img src={POKE_SPRITE_URL(133)} alt="" />
+        </div>
 
         <img
           src={computerFrame}

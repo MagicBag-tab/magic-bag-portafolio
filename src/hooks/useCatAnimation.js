@@ -56,7 +56,7 @@ export function useCatAnimation(state = 'idle', facingLeft = false, spriteUrl = 
     backgroundSize: `${SPRITE_COLS * FRAME_SIZE * SPRITE_SCALE}px auto`,
     backgroundRepeat: 'no-repeat',
     imageRendering: 'pixelated',
-    transform: facingLeft ? 'scaleX(-1)' : 'scaleX(1)',
+    transform: `${facingLeft ? 'scaleX(-1)' : 'scaleX(1)'} scale(1.35)`,
     backgroundColor: spriteUrl ? 'transparent' : '#9888cc',
     borderRadius: spriteUrl ? '0' : '8px',
   };
