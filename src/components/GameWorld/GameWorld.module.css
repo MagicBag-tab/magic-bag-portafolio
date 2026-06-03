@@ -26,6 +26,16 @@
   z-index: 9;
 }
 
+.groundFlowerLayer {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6000px;
+  height: 100%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 18;
+}
+
 .grassPatch {
   position: absolute;
   image-rendering: pixelated;
@@ -35,7 +45,7 @@
 .flowerPatch {
   position: absolute;
   image-rendering: pixelated;
-  transform: translateY(8px);
+  transform: translateY(14px);
   filter: drop-shadow(0 4px 0 rgba(60, 54, 72, 0.2));
 }
 

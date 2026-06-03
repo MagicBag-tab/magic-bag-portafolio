@@ -9,9 +9,9 @@
 
 .floatingText {
   position: absolute;
-  top: 108px;
+  top: 86px;
   font-family: var(--font-pixel);
-  font-size: 1.75rem;
+  font-size: 2.35rem;
   line-height: 1.35;
   color: #fff;
   text-shadow: 

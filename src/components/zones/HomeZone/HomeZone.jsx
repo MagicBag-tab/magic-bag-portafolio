@@ -5,9 +5,9 @@ export default function HomeZone() {
     <div className={styles.zone}>
       <div
         className={styles.floatingText}
-        style={{ left: '2040px' }}
+        style={{ left: '1960px' }}
       >
-        Magic Bag Portfolio
+        MagicBag Portafolio
       </div>
     </div>
   );

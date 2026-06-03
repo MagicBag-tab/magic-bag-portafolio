@@ -47,8 +47,8 @@
 }
 
 .computerPokemon img {
-  width: 86px;
-  height: 86px;
+  width: 120px;
+  height: 120px;
   image-rendering: pixelated;
 }
 

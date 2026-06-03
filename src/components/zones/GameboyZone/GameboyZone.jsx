@@ -24,7 +24,7 @@ export default function GameboyZone({ isNear = false, onActivate }) {
         className={styles.gameboyWrapper}
         style={{
           left: `${GAMEBOY_X}px`,
-          bottom: '23%',
+          bottom: '24%',
           width: `${GAMEBOY_WIDTH}px`,
           height: `${GAMEBOY_HEIGHT}px`,
         }}

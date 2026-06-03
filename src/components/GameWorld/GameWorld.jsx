@@ -280,6 +280,13 @@ export default function GameWorld({ onNavigate, soundEnabled, selectedCat }) {
             }}
           />
         ))}
+      </div>
+
+      <div
+        className={styles.groundFlowerLayer}
+        style={{ transform: `translateX(${-cameraOffsetX}px)` }}
+        aria-hidden="true"
+      >
         {FLOWER_PATCHES.map((patch, index) => (
           <img
             key={`flower-${patch.x}-${index}`}

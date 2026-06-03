@@ -2,13 +2,27 @@ import { useState, useEffect, useRef } from 'react';
 import { CAT_ANIMATIONS, FRAME_SIZE, SPRITE_COLS, SPRITE_SCALE } from '../constants/game';
 
 const DISPLAY_SIZE = FRAME_SIZE * SPRITE_SCALE;
+const DEFAULT_SHEET_WIDTH = SPRITE_COLS * FRAME_SIZE;
 
 export function useCatAnimation(state = 'idle', facingLeft = false, spriteUrl = '') {
   const [currentFrame, setCurrentFrame] = useState(0);
+  const [sheetWidth, setSheetWidth] = useState(DEFAULT_SHEET_WIDTH);
   const frameRef = useRef(0);
   const stateRef = useRef(state);
   const spriteRef = useRef(spriteUrl);
   const lastTimeRef = useRef(null);
+
+  useEffect(() => {
+    if (!spriteUrl) {
+      return;
+    }
+
+    const image = new Image();
+    image.onload = () => {
+      setSheetWidth(image.naturalWidth || DEFAULT_SHEET_WIDTH);
+    };
+    image.src = spriteUrl;
+  }, [spriteUrl]);
 
   useEffect(() => {
     if (stateRef.current !== state || spriteRef.current !== spriteUrl) {
@@ -53,10 +67,10 @@ export function useCatAnimation(state = 'idle', facingLeft = false, spriteUrl = 
     height: `${DISPLAY_SIZE}px`,
     backgroundImage: spriteUrl ? `url(${spriteUrl})` : 'none',
     backgroundPosition: `-${frameX * SPRITE_SCALE}px -${frameY * SPRITE_SCALE}px`,
-    backgroundSize: `${SPRITE_COLS * FRAME_SIZE * SPRITE_SCALE}px auto`,
+    backgroundSize: `${sheetWidth * SPRITE_SCALE}px auto`,
     backgroundRepeat: 'no-repeat',
     imageRendering: 'pixelated',
-    transform: `${facingLeft ? 'scaleX(-1)' : 'scaleX(1)'} scale(1.35)`,
+    transform: `${facingLeft ? 'scaleX(-1)' : 'scaleX(1)'} scale(2)`,
     backgroundColor: spriteUrl ? 'transparent' : '#9888cc',
     borderRadius: spriteUrl ? '0' : '8px',
   };
