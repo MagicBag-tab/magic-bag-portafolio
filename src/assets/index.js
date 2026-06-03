@@ -14,9 +14,6 @@ import tileGroundFill from './backgrounds/tile16.png';
 import grassPatch1 from './backgrounds/grass1.png';
 import grassPatch2 from './backgrounds/grass2.png';
 import grassPatch3 from './backgrounds/grass3.png';
-import flower1 from './flowers/flower-1.png';
-import flower2 from './flowers/flower-2.png';
-import flower3 from './flowers/flower-3.png';
 import star from './flowers/star.png';
 import flowerCosmo from './flowers/Cosmo.png';
 import flowerDaffodil from './flowers/Daffodil.png';
@@ -37,6 +34,10 @@ import clickSfx from './audio/click.wav';
 import computerFrame from './screens/Computer.png';
 import projectorFrame from './screens/ProjectorScreenClean1000.png';
 import crispyTvFrame from './screens/CrispyTV1000.png';
+
+const flower1 = flowerCosmo;
+const flower2 = flowerDaisy;
+const flower3 = flowerPoppy;
 
 export {
   catSpriteBlack,

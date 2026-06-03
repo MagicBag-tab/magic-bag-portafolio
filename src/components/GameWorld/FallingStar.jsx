@@ -1,31 +1,36 @@
 import { useState, useEffect } from 'react';
-import { fallingStarSprite } from '../../../assets/index';
+import { fallingStarSprite } from '../../assets/index';
 import styles from './FallingStar.module.css';
 
 export default function FallingStar() {
   const [active, setActive] = useState(false);
-  const [position, setPosition] = useState({ top: 50, left: 0 });
+  const [position, setPosition] = useState({ top: 56, left: 600 });
 
   useEffect(() => {
+    let hideTimeout;
+
     const triggerStar = () => {
-      // Posición aleatoria arriba
-      const top = Math.random() * 200 + 20; // 20px a 220px
-      const left = Math.random() * 2000; // a lo largo de las primeras zonas
-      setPosition({ top, left });
+      setPosition({
+        top: Math.random() * 180 + 24,
+        left: Math.random() * 5200 + 280,
+      });
       setActive(true);
 
-      // La animación dura ~3s, luego se oculta y espera
-      setTimeout(() => {
+      hideTimeout = window.setTimeout(() => {
         setActive(false);
       }, 3000);
     };
 
-    // Estrella fugaz cada 12 a 25 segundos
-    const interval = setInterval(() => {
+    triggerStar();
+
+    const interval = window.setInterval(() => {
       triggerStar();
     }, 12000 + Math.random() * 13000);
 
-    return () => clearInterval(interval);
+    return () => {
+      window.clearInterval(interval);
+      window.clearTimeout(hideTimeout);
+    };
   }, []);
 
   if (!active) return null;
@@ -35,8 +40,9 @@ export default function FallingStar() {
       className={styles.starContainer}
       style={{
         top: `${position.top}px`,
-        left: `${position.left}px`
+        left: `${position.left}px`,
       }}
+      aria-hidden="true"
     >
       <div className={styles.sprite} style={{ backgroundImage: `url(${fallingStarSprite})` }} />
     </div>

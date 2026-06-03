@@ -13,6 +13,7 @@ const SKILLS = [
   'Go',
   'Python',
   'Vue',
+  'C++',
 ];
 
 export default function GameboyScreen() {

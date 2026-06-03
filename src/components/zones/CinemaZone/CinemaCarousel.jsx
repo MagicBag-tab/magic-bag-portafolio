@@ -82,11 +82,12 @@ export default function CinemaCarousel() {
       <div className={styles.tvArea}>
         <img src={crispyTvFrame} alt="" aria-hidden="true" className={styles.tvFrameImg} />
         
-        <div className={styles.projectCard} key={`card-${project.id}`}>
+        <div className={styles.projectCard} key={`card-${project.id}`} style={{ '--accent': project.color }}>
           <h2 className={styles.cardTitle}>{project.title}</h2>
           <div className={styles.divider} />
 
-          <p className={styles.cardDesc}>{project.shortDesc}</p>
+          <p className={styles.cardShort}>{project.shortDesc}</p>
+          <p className={styles.cardDesc}>{project.longDescription}</p>
 
           <div className={styles.techStack}>
             {project.tech.map((t) => (

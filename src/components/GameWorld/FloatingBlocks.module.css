@@ -1,25 +1,44 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
 .platform {
   position: absolute;
   display: flex;
-  z-index: 4; /* Detrás del jugador, pero en frente del background */
   pointer-events: none;
-  filter: drop-shadow(0 8px 4px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 8px 0 rgba(24, 18, 30, 0.24));
   animation: float 4s ease-in-out infinite;
 }
 
 .platform:nth-child(even) {
-  animation-delay: 2s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  animation-delay: 1.8s;
 }
 
 .tile {
   width: 48px;
   height: 48px;
-  background-size: cover;
+  background-size: 48px 48px;
   background-repeat: no-repeat;
   image-rendering: pixelated;
+}
+
+.platformShadow {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  top: 38px;
+  height: 18px;
+  background-size: 48px 48px;
+  background-repeat: repeat-x;
+  opacity: 0.92;
+  image-rendering: pixelated;
+  z-index: -1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }

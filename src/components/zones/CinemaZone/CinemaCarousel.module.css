@@ -2,14 +2,14 @@
   position: absolute;
   display: flex;
   align-items: flex-end;
-  gap: 36px;
+  gap: 28px;
   pointer-events: all;
   z-index: 5;
 }
 
 .projectorArea {
   position: relative;
-  width: 480px;
+  width: 440px;
   aspect-ratio: 1260 / 1420;
 }
 
@@ -119,9 +119,10 @@
 
 .tvArea {
   position: relative;
-  width: 400px;
+  width: 520px;
   aspect-ratio: 1350 / 1280;
-  margin-bottom: 20px;
+  margin-bottom: 34px;
+  filter: drop-shadow(10px 14px 0 rgba(24, 18, 30, 0.2));
 }
 
 .tvFrameImg {
@@ -139,15 +140,17 @@
   position: absolute;
   left: 7.6%;
   top: 7.2%;
-  width: 84.8%;
+  width: 68%;
   height: 75%;
-  background: #111;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 50%, transparent 50%) 0 0 / 100% 8px,
+    #08080d;
   border: none;
   border-radius: 0;
-  padding: 15px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   z-index: 3;
   image-rendering: pixelated;
   overflow: hidden;
@@ -155,23 +158,34 @@
 
 .cardTitle {
   font-family: var(--font-pixel);
-  font-size: 0.6rem;
+  font-size: 0.5rem;
+  line-height: 1.5;
   color: #f3e7ff;
   margin: 0;
+  text-shadow: 0 0 8px color-mix(in srgb, var(--accent) 60%, transparent);
 }
 
 .divider {
   width: 100%;
   height: 2px;
-  background: #8f8794;
+  background: color-mix(in srgb, var(--accent) 68%, #8f8794);
+}
+
+.cardShort {
+  font-family: var(--font-pixel);
+  font-size: 0.26rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--accent) 74%, #fff);
+  margin: 0;
 }
 
 .cardDesc {
   font-family: var(--font-main);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: #d6cfdd;
-  line-height: 1.4;
+  line-height: 1.35;
   margin: 0;
+  overflow: hidden;
 }
 
 .techStack {
@@ -182,7 +196,7 @@
 
 .badge {
   font-family: var(--font-pixel);
-  font-size: 0.28rem;
+  font-size: 0.24rem;
   background: #312637;
   color: #f5d8f8;
   border: 1px solid #8f8794;
@@ -193,12 +207,12 @@
 .cardLinks {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: auto;
 }
 
 .linkBtn {
   font-family: var(--font-pixel);
-  font-size: 0.35rem;
+  font-size: 0.3rem;
   color: #f5d8f8;
   background: #312637;
   border: 2px solid #8f8794;
