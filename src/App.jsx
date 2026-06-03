@@ -1,63 +1,61 @@
 import { useState, useCallback } from 'react';
 import './styles/globals.css';
 
-// ─── Componentes del mundo ─────────────────────────────────────────────────────
-import GameWorld from './components/GameWorld/GameWorld';
-
-// ─── Pantallas ─────────────────────────────────────────────────────────────────
-import IntroScreen    from './components/screens/IntroScreen/IntroScreen';
-import ProjectsScreen from './components/screens/ProjectsScreen/ProjectsScreen';
-import ProjectDetail  from './components/screens/ProjectDetail/ProjectDetail';
-import AboutScreen    from './components/screens/AboutScreen/AboutScreen';
-
-// ─── UI global ─────────────────────────────────────────────────────────────────
-import Menu from './components/UI/Menu/Menu';
+import GameWorld            from './components/GameWorld/GameWorld';
+import ProjectDetailScreen  from './components/screens/ProjectDetail/ProjectDetailScreen';
+import Menu                 from './components/UI/Menu/Menu';
+import { projects }         from './data/projects';
 
 // =========================================
-// App — estado global del portafolio
+// App — estado global y routing del portafolio
+//
+// Pantallas:
+//   'world'         — GameWorld siempre montado
+//   'projectDetail' — sala de detalle del proyecto
+//   'about'         — pantalla "sobre mí" (se activa desde la Gameboy)
 // =========================================
 export default function App() {
-  const [currentScreen, setCurrentScreen]     = useState('world');
-  const [visitorName, setVisitorName]         = useState('');
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [soundEnabled, setSoundEnabled]       = useState(true);
+  const [currentScreen,    setCurrentScreen]    = useState('world');
+  const [selectedProject,  setSelectedProject]  = useState(null);
+  const [soundEnabled,     setSoundEnabled]      = useState(true);
 
-  // ── Toggle de sonido ─────────────────────────────────────────────────────────
+  // ── Toggle de sonido ────────────────────────────────────────────────────────
   const handleToggleSound = useCallback(() => {
     setSoundEnabled((prev) => {
       const next = !prev;
-      // Controlar la música de fondo del GameWorld
       const music = window.__gameMusic;
       if (music) {
-        if (next) {
-          music.play().catch(() => {});
-        } else {
-          music.pause();
-        }
+        next ? music.play().catch(() => {}) : music.pause();
       }
       return next;
     });
   }, []);
 
-  // ── Navegación ───────────────────────────────────────────────────────────────
-  const navigate = useCallback((screen) => {
+  // ── Navegación ──────────────────────────────────────────────────────────────
+  const handleNavigate = useCallback((screen) => {
     setCurrentScreen(screen);
   }, []);
 
-  const handleIntroComplete = useCallback((name) => {
-    setVisitorName(name);
-    setCurrentScreen('world');
+  // ── Entrar a la sala de un proyecto ─────────────────────────────────────────
+  const handleEnterDoor = useCallback((projectId) => {
+    const project = projects.find((p) => p.id === projectId);
+    if (project) {
+      setSelectedProject(project);
+      setCurrentScreen('projectDetail');
+    }
   }, []);
 
-  const handleSelectProject = useCallback((project) => {
-    setSelectedProject(project);
-    setCurrentScreen('projectDetail');
+  // ── Navegar entre proyectos dentro de la sala de detalle ────────────────────
+  const handleProjectNav = useCallback((direction) => {
+    setSelectedProject((prev) => {
+      if (!prev) return prev;
+      const idx  = projects.findIndex((p) => p.id === prev.id);
+      const next = projects[idx + direction];
+      return next ?? prev;
+    });
   }, []);
 
-  const handleBackFromDetail = useCallback(() => {
-    setCurrentScreen('projects');
-  }, []);
-
+  // ── Volver al mundo desde cualquier pantalla ─────────────────────────────────
   const handleBackToWorld = useCallback(() => {
     setCurrentScreen('world');
   }, []);
@@ -65,45 +63,32 @@ export default function App() {
   return (
     <>
       {/*
-        GameWorld SIEMPRE montado — preserva la posición del gatito.
-        Las pantallas internas se muestran encima con position: fixed.
+        GameWorld siempre montado — preserva la posición del gatito.
+        Las pantallas internas van encima con position: fixed.
       */}
-      <GameWorld onNavigate={navigate} soundEnabled={soundEnabled} />
+      <GameWorld
+        onNavigate={handleNavigate}
+        onEnterDoor={handleEnterDoor}
+        soundEnabled={soundEnabled}
+      />
 
-      {/* Pantalla de intro */}
-      {currentScreen === 'intro' && (
-        <IntroScreen onComplete={handleIntroComplete} />
-      )}
-
-      {/* Pantalla de proyectos */}
-      {currentScreen === 'projects' && (
-        <ProjectsScreen
-          onSelectProject={handleSelectProject}
-          onBack={handleBackToWorld}
-          visitorName={visitorName}
-        />
-      )}
-
-      {/* Detalle de proyecto */}
+      {/* ── Sala de detalle del proyecto ── */}
       {currentScreen === 'projectDetail' && selectedProject && (
-        <ProjectDetail
+        <ProjectDetailScreen
           project={selectedProject}
-          onBack={handleBackFromDetail}
+          onBack={handleBackToWorld}
+          onPrevProject={() => handleProjectNav(-1)}
+          onNextProject={() => handleProjectNav(+1)}
+          hasPrev={projects.findIndex((p) => p.id === selectedProject.id) > 0}
+          hasNext={projects.findIndex((p) => p.id === selectedProject.id) < projects.length - 1}
         />
       )}
 
-      {/* Pantalla sobre mí */}
-      {currentScreen === 'about' && (
-        <AboutScreen onBack={handleBackToWorld} />
-      )}
-
-      {/*
-        Menú hamburguesa — siempre visible, z-index máximo
-      */}
+      {/* ── Menú hamburguesa — siempre visible ── */}
       <Menu
         soundEnabled={soundEnabled}
         onToggleSound={handleToggleSound}
-        onNavigate={navigate}
+        onNavigate={handleNavigate}
         currentScreen={currentScreen}
       />
     </>

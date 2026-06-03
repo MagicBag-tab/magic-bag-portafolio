@@ -1,0 +1,262 @@
+/* ProjectDetailScreen — sala de cine interior */
+.screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #0a0818 0%, #120a20 60%, #1a0a2e 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: var(--z-screen);
+  padding: 16px 24px 20px;
+  animation: fadeInScale 0.4s ease both;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Fondo de estrellas ── */
+.starsBg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: twinkle 2s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.4); }
+}
+
+/* ── Header ── */
+.header {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.backBtn {
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.backBtn:hover {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.externalLinks {
+  display: flex;
+  gap: 10px;
+}
+
+.linkBtn {
+  font-family: var(--font-pixel);
+  font-size: 0.42rem;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 8px 14px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.linkBtn:hover {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+.linkBtnAccent {
+  background: color-mix(in srgb, var(--accent, #9888cc) 25%, transparent);
+  border-color: color-mix(in srgb, var(--accent, #9888cc) 50%, transparent);
+  color: var(--accent, #d4b8f0);
+}
+
+.linkBtnAccent:hover {
+  background: color-mix(in srgb, var(--accent, #9888cc) 40%, transparent);
+}
+
+/* ── Marco de cine ── */
+.cinemaFrame {
+  width: 100%;
+  max-width: 760px;
+  aspect-ratio: 16/9;
+  background: #000;
+  border: 8px solid #1a1a2e;
+  border-radius: 4px;
+  box-shadow:
+    0 0 0 3px #2a2040,
+    0 0 40px color-mix(in srgb, var(--accent, #9888cc) 30%, transparent),
+    0 20px 60px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.iframe,
+.screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+
+/* Placeholder cuando no hay preview */
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent, #9888cc) 20%, #080818) 0%,
+    #080818 100%
+  );
+  gap: 12px;
+}
+
+.placeholderEmoji { font-size: 3rem; }
+
+.placeholderText {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* Máscara de borde de cine */
+.cinemaMask {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+
+/* ── Info del proyecto ── */
+.infoSection {
+  width: 100%;
+  max-width: 760px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-family: var(--font-pixel);
+  font-size: 0.9rem;
+  color: white;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px var(--accent, #9888cc);
+}
+
+.description {
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.techStack {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.techBadge {
+  font-family: var(--font-pixel);
+  font-size: 0.32rem;
+  background: color-mix(in srgb, var(--accent, #9888cc) 15%, rgba(255,255,255,0.05));
+  color: var(--accent, #d4b8f0);
+  border: 1px solid color-mix(in srgb, var(--accent, #9888cc) 40%, transparent);
+  border-radius: 6px;
+  padding: 5px 10px;
+}
+
+/* ── Navegación anterior / siguiente ── */
+.projectNav {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.navBtn {
+  font-family: var(--font-pixel);
+  font-size: 0.38rem;
+  color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  max-width: 200px;
+  text-align: center;
+}
+
+.navBtn:hover {
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
+
+/* ── Pokémon guardián ── */
+.guardian {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+  animation: guardianFloat 3s ease-in-out infinite;
+}
+
+@keyframes guardianFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+.guardianSprite {
+  width: 72px;
+  height: 72px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 4px 12px rgba(255,255,255,0.2));
+}
+
+.guardianLabel {
+  font-family: var(--font-pixel);
+  font-size: 0.3rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+  text-transform: capitalize;
+}

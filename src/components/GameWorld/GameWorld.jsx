@@ -1,8 +1,16 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Cat from '../Cat/Cat';
 import ParallaxLayer from '../ParallaxLayer/ParallaxLayer';
-import ClickableObject from '../ClickableObject/ClickableObject';
-import { OBJECT_IDS, CAMERA_LERP, CAMERA_OFFSET_X } from '../../constants/game';
+import HomeZone from '../zones/HomeZone/HomeZone';
+import GameboyZone from '../zones/GameboyZone/GameboyZone';
+import CinemaZone from '../zones/CinemaZone/CinemaZone';
+import { useWorldCamera } from '../../hooks/useWorldCamera';
+import {
+  GAMEBOY_X,
+  OBJECT_IDS,
+  getFloorY,
+} from '../../constants/game';
+import { projects } from '../../data/projects';
 
 // ─── Assets ───────────────────────────────────────────────────────────────────
 import {
@@ -21,132 +29,130 @@ import {
 
 import styles from './GameWorld.module.css';
 
-// ─── Configuración de objetos del mundo ──────────────────────────────────────
-const WORLD_OBJECTS = [
-  {
-    id: OBJECT_IDS.CLOUD,
-    x: 600,
-    bottomOffset: 200,
-    label: 'Intro',
-    icon: null,         // usamos imagen real en ClickableObject
-    color: 'transparent',
-    screen: 'intro',
-  },
-  {
-    id: OBJECT_IDS.DESK,
-    x: 1400,
-    bottomOffset: 30,
-    label: 'Proyectos',
-    icon: null,
-    color: 'transparent',
-    screen: 'projects',
-  },
-  {
-    id: OBJECT_IDS.PORTAL,
-    x: 2600,
-    bottomOffset: 30,
-    label: 'Sobre mí',
-    icon: null,
-    color: 'transparent',
-    screen: 'about',
-  },
-];
-
-// ─── Capas de parallax con imágenes reales ────────────────────────────────────
-// Nota: el sky es el fondo fijo, las demás capas se mueven a distinta velocidad
+// ─── Capas de parallax ────────────────────────────────────────────────────────
+// Nota sobre el gap: las capas de nubes y montañas se superponen verticalmente
+// usando altura mayor y ajuste de backgroundPosition para evitar huecos.
 const PARALLAX_LAYERS = [
   {
     id: 'sky',
-    speed: 0.0,           // cielo fijo, no se mueve
+    speed: 0.0,
     imageUrl: skyBg,
     height: '100%',
     zIndex: 1,
-    style: { top: 0, backgroundSize: 'cover', backgroundPosition: 'center', minWidth: '100%' },
+    style: { top: 0, backgroundSize: 'cover', backgroundPosition: 'center' },
   },
   {
     id: 'clouds-far',
-    speed: 0.12,
+    speed: 0.10,
     imageUrl: cloudsFar,
-    height: '55%',
+    height: '70%',        // más alto para cubrir sin gap
     zIndex: 2,
-    style: { top: 0, backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
+    style: { top: '-5%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
   },
   {
     id: 'clouds-near-1',
     speed: 0.22,
     imageUrl: cloudsNear1,
-    height: '45%',
+    height: '55%',
     zIndex: 3,
-    style: { top: '5%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
+    style: { top: '0%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
   },
   {
     id: 'clouds-near-2',
     speed: 0.30,
     imageUrl: cloudsNear2,
-    height: '40%',
+    height: '55%',
     zIndex: 4,
-    style: { top: '10%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
+    style: { top: '5%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
   },
   {
     id: 'mountains',
     speed: 0.45,
     imageUrl: mountainsBg,
-    height: '60%',
+    height: '70%',        // más alto para llegar hasta el suelo
     zIndex: 5,
-    style: { bottom: '12%', top: 'auto', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x', backgroundPosition: 'bottom' },
+    style: {
+      bottom: 0,
+      top: 'auto',
+      backgroundSize: 'auto 100%',
+      backgroundRepeat: 'repeat-x',
+      backgroundPosition: 'bottom center',
+    },
   },
   {
     id: 'ground-flowers',
     speed: 0.85,
     imageUrl: groundFlowers,
-    height: '18%',
+    height: '22%',        // flores del suelo, más altas para solapar el suelo
     zIndex: 6,
-    style: { bottom: '12%', top: 'auto', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x', backgroundPosition: 'bottom' },
+    style: {
+      bottom: '12%',
+      top: 'auto',
+      backgroundSize: 'auto 100%',
+      backgroundRepeat: 'repeat-x',
+      backgroundPosition: 'bottom',
+    },
   },
   {
     id: 'ground',
     speed: 1.0,
     imageUrl: groundBg,
-    height: '15%',
+    height: '16%',
     zIndex: 7,
-    style: { bottom: 0, top: 'auto', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x', backgroundPosition: 'bottom' },
+    style: {
+      bottom: 0,
+      top: 'auto',
+      backgroundSize: 'auto 100%',
+      backgroundRepeat: 'repeat-x',
+      backgroundPosition: 'bottom',
+    },
   },
 ];
 
-// ─── Nubes pixel art flotantes en el mundo ────────────────────────────────────
-// Cada una alterna entre versión A y B para efecto de parpadeo suave
+// ─── Nubes pixel art flotantes ─────────────────────────────────────────────────
 const PIXEL_CLOUDS = [
-  { id: 'pc1', x: 300,  y: 80,  imgA: cloudA1, imgB: cloudB1, scale: 2.5, delay: 0    },
-  { id: 'pc2', x: 900,  y: 60,  imgA: cloudA2, imgB: cloudB2, scale: 2.0, delay: 1500 },
-  { id: 'pc3', x: 1700, y: 90,  imgA: cloudA1, imgB: cloudB1, scale: 2.8, delay: 800  },
-  { id: 'pc4', x: 2400, y: 70,  imgA: cloudA2, imgB: cloudB2, scale: 2.2, delay: 2000 },
-  { id: 'pc5', x: 3200, y: 85,  imgA: cloudA1, imgB: cloudB1, scale: 1.8, delay: 500  },
+  { id: 'pc1', x: 400,  y: 60,  imgA: cloudA1, imgB: cloudB1, scale: 2.4, delay: 0    },
+  { id: 'pc2', x: 1100, y: 45,  imgA: cloudA2, imgB: cloudB2, scale: 2.0, delay: 1200 },
+  { id: 'pc3', x: 2000, y: 70,  imgA: cloudA1, imgB: cloudB1, scale: 2.6, delay: 600  },
+  { id: 'pc4', x: 2900, y: 50,  imgA: cloudA2, imgB: cloudB2, scale: 2.1, delay: 1800 },
+  { id: 'pc5', x: 3900, y: 65,  imgA: cloudA1, imgB: cloudB1, scale: 1.9, delay: 400  },
+  { id: 'pc6', x: 4800, y: 55,  imgA: cloudA2, imgB: cloudB2, scale: 2.2, delay: 1000 },
 ];
 
+// ─── Lista de interactables para el gato ──────────────────────────────────────
+// Incluye la Gameboy y todas las puertas de proyectos
+const buildInteractables = () => {
+  const list = [
+    { id: OBJECT_IDS.GAMEBOY, x: GAMEBOY_X + 130 }, // centro de la Gameboy
+  ];
+  projects.forEach((p) => {
+    list.push({ id: `${OBJECT_IDS.DOOR_BASE}${p.id}`, x: p.doorX + 45 });
+  });
+  return list;
+};
+
+const INTERACTABLES = buildInteractables();
+
 // =========================================
-// GameWorld — mundo 2D scrolleable con parallax y assets reales
+// GameWorld — mundo 2D con 3 zonas y parallax
 // =========================================
-export default function GameWorld({ onNavigate }) {
+export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
   const [nearObjectId, setNearObjectId]   = useState(null);
   const [cameraOffsetX, setCameraOffsetX] = useState(0);
-  // Alternancia A/B de nubes pixel art
   const [cloudVariant, setCloudVariant]   = useState(false);
 
-  const cameraRef   = useRef(0);
-  const musicRef    = useRef(null);
-  const hasStarted  = useRef(false); // música inicia con primera interacción
+  const { computeCamera }  = useWorldCamera();
+  const musicRef           = useRef(null);
+  const hasStarted         = useRef(false);
 
-  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1280;
-  const targetCameraX = CAMERA_OFFSET_X * viewportWidth;
-
-  // ── Música de fondo ──────────────────────────────────────────────────────────
+  // ── Música de fondo ───────────────────────────────────────────────────────────
   useEffect(() => {
     const audio = new Audio(bgMusic1);
     audio.loop   = true;
     audio.volume = 0.35;
     musicRef.current = audio;
+    window.__gameMusic = audio;
 
-    // Iniciar con la primera interacción del usuario (política de autoplay)
     const startMusic = () => {
       if (!hasStarted.current) {
         hasStarted.current = true;
@@ -161,56 +167,61 @@ export default function GameWorld({ onNavigate }) {
       audio.pause();
       window.removeEventListener('keydown', startMusic);
       window.removeEventListener('click',   startMusic);
+      delete window.__gameMusic;
     };
   }, []);
 
-  // ── Alternancia de nubes pixel art cada 1.5s ─────────────────────────────────
+  // Responder a cambios del toggle de sonido
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCloudVariant((v) => !v);
-    }, 1500);
-    return () => clearInterval(interval);
+    const audio = musicRef.current;
+    if (!audio) return;
+    if (soundEnabled) {
+      if (hasStarted.current) audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  }, [soundEnabled]);
+
+  // ── Alternancia de nubes pixel art (A↔B) cada 1.5s ────────────────────────────
+  useEffect(() => {
+    const id = setInterval(() => setCloudVariant((v) => !v), 1500);
+    return () => clearInterval(id);
   }, []);
 
   // ── Callbacks del gato ────────────────────────────────────────────────────────
-  const handleNearObject = useCallback((objectId) => {
-    setNearObjectId(objectId);
+  const handleNearObject = useCallback((id) => {
+    setNearObjectId(id);
   }, []);
 
   const handleLeaveObject = useCallback(() => {
     setNearObjectId(null);
   }, []);
 
-  const handleCameraUpdate = useCallback((worldX) => {
-    const targetOffset = worldX - targetCameraX;
-    const current = cameraRef.current;
-    const next = current + (targetOffset - current) * CAMERA_LERP;
-    cameraRef.current = Math.max(0, next);
-    setCameraOffsetX(cameraRef.current);
-  }, [targetCameraX]);
+  const handlePositionChange = useCallback((catX) => {
+    const offset = computeCamera(catX);
+    setCameraOffsetX(offset);
+  }, [computeCamera]);
 
-  // ── Click en objeto clickeable ────────────────────────────────────────────────
-  const handleObjectClick = useCallback((objectId) => {
-    // Efecto de sonido al entrar
+  // ── Click en la Gameboy ────────────────────────────────────────────────────────
+  const handleGameboyActivate = useCallback(() => {
     const sfx = new Audio(clickSfx);
     sfx.volume = 0.6;
     sfx.play().catch(() => {});
-
-    const obj = WORLD_OBJECTS.find((o) => o.id === objectId);
-    if (obj) onNavigate(obj.screen);
+    onNavigate('about');
   }, [onNavigate]);
 
-  // ── Exposer función para pausar/reanudar música (para el toggle de sonido) ──
-  // Se inyecta al window temporalmente para que App.jsx pueda controlarlo
-  useEffect(() => {
-    window.__gameMusic = musicRef.current;
-    return () => { delete window.__gameMusic; };
-  }, []);
+  // ── Click en una puerta de proyecto ───────────────────────────────────────────
+  const handleEnterDoor = useCallback((projectId) => {
+    const sfx = new Audio(clickSfx);
+    sfx.volume = 0.6;
+    sfx.play().catch(() => {});
+    onEnterDoor?.(projectId);
+  }, [onEnterDoor]);
 
   return (
     <div className={styles.world} aria-label="Mundo del portafolio">
 
-      {/* ── Capas de parallax ── */}
+      {/* ── Capas de parallax (fijas al viewport) ── */}
       {PARALLAX_LAYERS.map((layer) => (
         <ParallaxLayer
           key={layer.id}
@@ -223,10 +234,10 @@ export default function GameWorld({ onNavigate }) {
         />
       ))}
 
-      {/* ── Nubes pixel art flotantes (en parallax intermedio) ── */}
+      {/* ── Nubes pixel art flotantes (entre capas) ── */}
       {PIXEL_CLOUDS.map((cloud) => {
-        const img = cloudVariant ? cloud.imgB : cloud.imgA;
-        const parallaxX = -(cameraOffsetX * 0.28); // velocidad intermedia
+        const img        = cloudVariant ? cloud.imgB : cloud.imgA;
+        const parallaxX  = -(cameraOffsetX * 0.25);
         return (
           <img
             key={cloud.id}
@@ -235,50 +246,50 @@ export default function GameWorld({ onNavigate }) {
             aria-hidden="true"
             className={styles.pixelCloud}
             style={{
-              left: `${cloud.x + parallaxX}px`,
-              top:  `${cloud.y}px`,
-              width: `${128 * cloud.scale}px`,
+              left:           `${cloud.x + parallaxX}px`,
+              top:            `${cloud.y}px`,
+              width:          `${128 * cloud.scale}px`,
               animationDelay: `${cloud.delay}ms`,
             }}
           />
         );
       })}
 
-      {/* ── Contenido del mundo (se mueve con la cámara) ── */}
+      {/* ── Contenido del mundo (translateX de cámara) ── */}
       <div
         className={styles.worldContent}
         style={{ transform: `translateX(${-cameraOffsetX}px)` }}
       >
-        {/* Objetos clickeables */}
-        {WORLD_OBJECTS.map((obj) => (
-          <ClickableObject
-            key={obj.id}
-            id={obj.id}
-            x={obj.x}
-            y={obj.bottomOffset}
-            label={obj.label}
-            icon={obj.icon}
-            color={obj.color}
-            isNear={nearObjectId === obj.id}
-            onClick={handleObjectClick}
-          />
-        ))}
+        {/* Zona izquierda — Gameboy */}
+        <GameboyZone
+          isNear={nearObjectId === OBJECT_IDS.GAMEBOY}
+          onActivate={handleGameboyActivate}
+        />
+
+        {/* Zona central — cartel y flores */}
+        <HomeZone />
+
+        {/* Zona derecha — cine Pokémon */}
+        <CinemaZone
+          nearObjectId={nearObjectId}
+          onEnterDoor={handleEnterDoor}
+        />
 
         {/* Gatito */}
         <Cat
-          objects={WORLD_OBJECTS.map((o) => ({ id: o.id, x: o.x }))}
+          interactables={INTERACTABLES}
           onNearObject={handleNearObject}
           onLeaveObject={handleLeaveObject}
-          onPositionChange={handleCameraUpdate}
-          cameraOffsetX={0}
+          onPositionChange={handlePositionChange}
         />
       </div>
 
       {/* ── HUD de controles ── */}
-      <div className={styles.controls}>
-        <span>← → &nbsp;Mover</span>
-        <span>Espacio &nbsp;Saltar</span>
-        <span>Clic &nbsp;Entrar</span>
+      <div className={styles.controls} aria-label="Controles del juego">
+        <span>← →  Mover</span>
+        <span>Espacio  Saltar</span>
+        <span>Shift  Correr</span>
+        <span>Clic  Entrar</span>
       </div>
     </div>
   );

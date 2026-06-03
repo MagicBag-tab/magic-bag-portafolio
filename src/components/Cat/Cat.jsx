@@ -7,86 +7,81 @@ import {
   JUMP_FORCE,
   WALK_SPEED,
   RUN_SPEED,
-  FLOOR_Y,
   WORLD_WIDTH,
   FRAME_SIZE,
   SPRITE_SCALE,
-  NEAR_OBJECT_THRESHOLD,
+  NEAR_THRESHOLD,
+  CAT_SPAWN_X,
+  CLIFF_EDGE_X,
+  OBJECT_IDS,
+  getFloorY,
 } from '../../constants/game';
+import { projects } from '../../data/projects';
 
 // ─── Assets reales ────────────────────────────────────────────────────────────
 import { catSprite, jumpSfx } from '../../assets/index';
 
 import styles from './Cat.module.css';
 
-// Posición inicial del gatito en el mundo
-const INITIAL_X = 150;
-
-// FLOOR_Y dinámico: el suelo está en bottom 15% del viewport
-// El gato de 128px de alto tiene que pararse justo encima
-const getFloorY = () => {
-  const vh = window.innerHeight;
-  const groundTop = vh * 0.85;       // el suelo arranca al 85% del alto
-  const catHeight = FRAME_SIZE * SPRITE_SCALE;
-  return groundTop - catHeight;      // borde superior del gato al estar en el suelo
-};
-
 // =========================================
-// Cat — personaje principal con sprite sheet real
+// Cat — personaje principal pixel art
+//
 // Props:
-//   onNearObject(objectId)  — callback al acercarse a un objeto
-//   onLeaveObject()         — callback al alejarse de todos
-//   onPositionChange(worldX)— callback con posición X actual (para cámara)
-//   objects                 — array de { id, x } del mundo
+//   interactables   — array de { id, x } del mundo (Gameboy, puertas, etc.)
+//   onNearObject(id) — callback al acercarse a un objeto
+//   onLeaveObject()  — callback al alejarse de todos los objetos
+//   onPositionChange(x) — callback con posición X para la cámara
 // =========================================
 export default function Cat({
+  interactables = [],
   onNearObject,
   onLeaveObject,
   onPositionChange,
-  objects = [],
 }) {
-  // Estado de posición y física
-  const floorY      = useRef(getFloorY());
-  const posRef      = useRef({ x: INITIAL_X, y: floorY.current });
+  // ── Física ───────────────────────────────────────────────────────────────────
+  const floorYRef   = useRef(getFloorY());
+  const posRef      = useRef({ x: CAT_SPAWN_X, y: floorYRef.current });
   const velRef      = useRef({ x: 0, y: 0 });
   const onGroundRef = useRef(true);
-  const nearObjRef  = useRef(null);
   const jumpedRef   = useRef(false);
+  const nearObjRef  = useRef(null);
 
-  // Estado React (solo para re-render visual)
-  const [renderPos,  setRenderPos]  = useState({ x: INITIAL_X, y: floorY.current });
+  // ── Estado React (solo para re-render visual) ─────────────────────────────────
+  const [renderPos,  setRenderPos]  = useState({ x: CAT_SPAWN_X, y: floorYRef.current });
   const [catState,   setCatState]   = useState('idle');
   const [facingLeft, setFacingLeft] = useState(false);
 
-  // Teclas
+  // ── Teclas ───────────────────────────────────────────────────────────────────
   const keys    = useKeyboard();
   const keysRef = useRef(keys);
   keysRef.current = keys;
 
-  // Refs para callbacks estables
-  const onNearRef     = useRef(onNearObject);
-  const onLeaveRef    = useRef(onLeaveObject);
-  const onPosRef      = useRef(onPositionChange);
-  onNearRef.current   = onNearObject;
-  onLeaveRef.current  = onLeaveObject;
-  onPosRef.current    = onPositionChange;
+  // ── Refs estables para callbacks ──────────────────────────────────────────────
+  const onNearRef    = useRef(onNearObject);
+  const onLeaveRef   = useRef(onLeaveObject);
+  const onPosRef     = useRef(onPositionChange);
+  onNearRef.current  = onNearObject;
+  onLeaveRef.current = onLeaveObject;
+  onPosRef.current   = onPositionChange;
 
-  // Animación del sprite
+  // ── Animación del sprite ──────────────────────────────────────────────────────
   const { spriteStyle } = useCatAnimation(catState, facingLeft, catSprite);
 
-  // ── Sonido de salto ──────────────────────────────────────────────────────────
-  const playJumpSound = useCallback(() => {
+  // ── Sonido de salto ───────────────────────────────────────────────────────────
+  const playJump = useCallback(() => {
     const sfx = new Audio(jumpSfx);
-    sfx.volume = 0.5;
+    sfx.volume = 0.45;
     sfx.play().catch(() => {});
   }, []);
 
-  // ── Loop del juego ───────────────────────────────────────────────────────────
+  // ── Game loop ─────────────────────────────────────────────────────────────────
   const update = useCallback(() => {
-    const k       = keysRef.current;
-    const pos     = posRef.current;
-    const vel     = velRef.current;
-    let onGround  = onGroundRef.current;
+    const k      = keysRef.current;
+    const pos    = posRef.current;
+    const vel    = velRef.current;
+    let onGround = onGroundRef.current;
+    const floorY = floorYRef.current;
+    const catW   = FRAME_SIZE * SPRITE_SCALE;
 
     // ── Movimiento horizontal ──
     if (k.right) {
@@ -102,12 +97,9 @@ export default function Cat({
       vel.y = JUMP_FORCE;
       onGround = false;
       jumpedRef.current = true;
-      playJumpSound();
+      playJump();
     }
-    // Reset del flag cuando se suelta la tecla
-    if (!k.jump) {
-      jumpedRef.current = false;
-    }
+    if (!k.jump) jumpedRef.current = false;
 
     // ── Gravedad ──
     vel.y += GRAVITY;
@@ -116,15 +108,21 @@ export default function Cat({
     pos.x += vel.x;
     pos.y += vel.y;
 
-    // ── Límites horizontales ──
-    const catW = FRAME_SIZE * SPRITE_SCALE;
+    // ── Límites del mundo ──
     pos.x = Math.max(0, Math.min(pos.x, WORLD_WIDTH - catW));
 
+    // ── Colisión con el precipicio (zona izquierda) ──
+    // El gato no puede pasar más allá del borde del cliff
+    if (pos.x < CLIFF_EDGE_X - catW) {
+      pos.x = CLIFF_EDGE_X - catW;
+      vel.x = 0;
+    }
+
     // ── Colisión con el suelo ──
-    if (pos.y >= floorY.current) {
-      pos.y     = floorY.current;
-      vel.y     = 0;
-      onGround  = true;
+    if (pos.y >= floorY) {
+      pos.y    = floorY;
+      vel.y    = 0;
+      onGround = true;
     }
 
     onGroundRef.current = onGround;
@@ -140,11 +138,13 @@ export default function Cat({
     // ── Dirección ──
     const newFacing = vel.x < 0 ? true : vel.x > 0 ? false : facingLeft;
 
-    // ── Detección de objetos cercanos ──
+    // ── Detección de objetos interactivos ──
+    const catCenter = pos.x + catW / 2;
     let closest     = null;
-    let closestDist = NEAR_OBJECT_THRESHOLD;
-    for (const obj of objects) {
-      const dist = Math.abs(pos.x + (FRAME_SIZE * SPRITE_SCALE) / 2 - obj.x);
+    let closestDist = NEAR_THRESHOLD;
+
+    for (const obj of interactables) {
+      const dist = Math.abs(catCenter - obj.x);
       if (dist < closestDist) {
         closestDist = dist;
         closest     = obj.id;
@@ -160,15 +160,15 @@ export default function Cat({
     // ── Notificar posición a la cámara ──
     onPosRef.current?.(pos.x);
 
-    // ── Actualizar estado React ──
+    // ── Sync visual ──
     setRenderPos({ x: pos.x, y: pos.y });
     setCatState(newState);
     setFacingLeft(newFacing);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useGameLoop(update);
 
-  // Tamaño visual del sprite escalado
   const displaySize = FRAME_SIZE * SPRITE_SCALE;
 
   return (

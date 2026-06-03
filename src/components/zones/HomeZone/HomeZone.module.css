@@ -1,0 +1,67 @@
+/* HomeZone — zona central del mundo */
+.zone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ── Cartel RPG ──────────────────────────────────────────────────────────────── */
+.signpost {
+  position: absolute;
+  bottom: 14%;        /* sobre el suelo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Poste de madera */
+.pole {
+  width: 8px;
+  height: 80px;
+  background: linear-gradient(90deg, #a0724a 0%, #c49060 40%, #a0724a 100%);
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+}
+
+/* Carteles */
+.sign {
+  position: absolute;
+  background: #fffbee;
+  border: 3px solid #a0724a;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.35rem;
+  color: #6b4226;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.18);
+  image-rendering: pixelated;
+}
+
+.signLeft {
+  top: 10px;
+  right: calc(100% + 6px);
+}
+
+.signRight {
+  top: 28px;
+  left: calc(100% + 6px);
+}
+
+/* ── Flores decorativas ───────────────────────────────────────────────────────── */
+.flower {
+  position: absolute;
+  bottom: 13%;        /* justo sobre el suelo */
+  image-rendering: pixelated;
+  animation: floatFlower 3.5s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+@keyframes floatFlower {
+  0%, 100% { transform-origin: bottom center; }
+  50%       { transform: translateY(-4px) rotate(2deg); }
+}
