@@ -15,47 +15,34 @@ import {
   CLIFF_EDGE_X,
   getFloorY,
 } from '../../constants/game';
-
-import { catSpriteBlack, catSpriteGinger, catSpriteWhite, jumpSfx } from '../../assets/index';
-
+import { jumpSfx } from '../../assets/index';
+import { DEFAULT_CAT_ID, getCatById } from '../../data/cats';
 import styles from './Cat.module.css';
 
-// =========================================
-// Cat — personaje principal pixel art
-//
-// Props:
-//   interactables   — array de { id, x } del mundo (Gameboy, puertas, etc.)
-//   onNearObject(id) — callback al acercarse a un objeto
-//   onLeaveObject()  — callback al alejarse de todos los objetos
-//   onPositionChange(x) — callback con posición X para la cámara
-//   selectedCat     — 'black', 'ginger', or 'white'
-// =========================================
 export default function Cat({
   interactables = [],
   onNearObject,
   onLeaveObject,
   onPositionChange,
-  selectedCat = 'black',
+  selectedCat = DEFAULT_CAT_ID,
 }) {
-
   const initialFloorY = getFloorY();
-  const floorYRef   = useRef(initialFloorY);
-  const posRef      = useRef({ x: CAT_SPAWN_X, y: initialFloorY });
-  const velRef      = useRef({ x: 0, y: 0 });
+  const floorYRef = useRef(initialFloorY);
+  const posRef = useRef({ x: CAT_SPAWN_X, y: initialFloorY });
+  const velRef = useRef({ x: 0, y: 0 });
   const onGroundRef = useRef(true);
-  const jumpedRef   = useRef(false);
-  const nearObjRef  = useRef(null);
+  const jumpedRef = useRef(false);
+  const nearObjRef = useRef(null);
 
-  const [renderPos,  setRenderPos]  = useState(() => ({ x: CAT_SPAWN_X, y: initialFloorY }));
-  const [catState,   setCatState]   = useState('idle');
+  const [renderPos, setRenderPos] = useState(() => ({ x: CAT_SPAWN_X, y: initialFloorY }));
+  const [catState, setCatState] = useState('idle');
   const [facingLeft, setFacingLeft] = useState(false);
 
-  const keys    = useKeyboard();
+  const keys = useKeyboard();
   const keysRef = useRef(keys);
-
-  const onNearRef    = useRef(onNearObject);
-  const onLeaveRef   = useRef(onLeaveObject);
-  const onPosRef     = useRef(onPositionChange);
+  const onNearRef = useRef(onNearObject);
+  const onLeaveRef = useRef(onLeaveObject);
+  const onPosRef = useRef(onPositionChange);
 
   useEffect(() => {
     keysRef.current = keys;
@@ -67,15 +54,7 @@ export default function Cat({
     onPosRef.current = onPositionChange;
   }, [onNearObject, onLeaveObject, onPositionChange]);
 
-  // ── Sprite seleccionado ───────────────────────────────────────────────────────
-  const spritesMap = {
-    black: catSpriteBlack,
-    ginger: catSpriteGinger,
-    white: catSpriteWhite,
-  };
-  const activeSprite = spritesMap[selectedCat] || catSpriteBlack;
-
-  // ── Animación del sprite ──────────────────────────────────────────────────────
+  const activeSprite = getCatById(selectedCat).sprite;
   const { spriteStyle } = useCatAnimation(catState, facingLeft, activeSprite);
 
   const playJump = useCallback(() => {
@@ -85,12 +64,12 @@ export default function Cat({
   }, []);
 
   const update = useCallback(() => {
-    const k      = keysRef.current;
-    const pos    = posRef.current;
-    const vel    = velRef.current;
+    const k = keysRef.current;
+    const pos = posRef.current;
+    const vel = velRef.current;
     let onGround = onGroundRef.current;
     const floorY = floorYRef.current;
-    const catW   = FRAME_SIZE * SPRITE_SCALE;
+    const catW = FRAME_SIZE * SPRITE_SCALE;
 
     if (k.right) {
       vel.x = k.shift ? RUN_SPEED : WALK_SPEED;
@@ -109,10 +88,8 @@ export default function Cat({
     if (!k.jump) jumpedRef.current = false;
 
     vel.y += GRAVITY;
-
     pos.x += vel.x;
     pos.y += vel.y;
-
     pos.x = Math.max(0, Math.min(pos.x, WORLD_WIDTH - catW));
 
     if (pos.x < CLIFF_EDGE_X - catW) {
@@ -121,8 +98,8 @@ export default function Cat({
     }
 
     if (pos.y >= floorY) {
-      pos.y    = floorY;
-      vel.y    = 0;
+      pos.y = floorY;
+      vel.y = 0;
       onGround = true;
     }
 
@@ -136,31 +113,28 @@ export default function Cat({
     }
 
     const newFacing = vel.x < 0 ? true : vel.x > 0 ? false : facingLeft;
-
     const catCenter = pos.x + catW / 2;
-    let closest     = null;
+    let closest = null;
     let closestDist = NEAR_THRESHOLD;
 
     for (const obj of interactables) {
       const dist = Math.abs(catCenter - obj.x);
       if (dist < closestDist) {
         closestDist = dist;
-        closest     = obj.id;
+        closest = obj.id;
       }
     }
 
     if (closest !== nearObjRef.current) {
       nearObjRef.current = closest;
       if (closest) onNearRef.current?.(closest);
-      else         onLeaveRef.current?.();
+      else onLeaveRef.current?.();
     }
 
     onPosRef.current?.(pos.x);
-
     setRenderPos({ x: pos.x, y: pos.y });
     setCatState(newState);
     setFacingLeft(newFacing);
-
   }, [facingLeft, interactables, playJump]);
 
   useGameLoop(update);
@@ -172,7 +146,7 @@ export default function Cat({
       className={styles.cat}
       style={{
         left: `${renderPos.x}px`,
-        top:  `${renderPos.y - displaySize}px`,
+        top: `${renderPos.y - displaySize}px`,
         ...spriteStyle,
       }}
       aria-label="Gatito protagonista"

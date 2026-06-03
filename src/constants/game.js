@@ -33,11 +33,11 @@ export const CAMERA_OFFSET_X = 0.4;
 export const NEAR_THRESHOLD = 110;
 
 export const CAT_ANIMATIONS = {
-  idle: { row: 0, frames: 4,  fps: 6  },
-  walk: { row: 1, frames: 8,  fps: 12 },
-  run:  { row: 2, frames: 8,  fps: 16 },
-  jump: { row: 3, frames: 4,  fps: 10 },
-  land: { row: 4, frames: 3,  fps: 10 },
+  idle: { row: 25, frames: 5,  fps: 6  },
+  walk: { row: 32, frames: 11, fps: 12 },
+  run:  { row: 34, frames: 11, fps: 18 },
+  jump: { row: 63, frames: 5,  fps: 10 },
+  land: { row: 64, frames: 5,  fps: 10 },
 };
 
 export const PARALLAX_SPEEDS = {
