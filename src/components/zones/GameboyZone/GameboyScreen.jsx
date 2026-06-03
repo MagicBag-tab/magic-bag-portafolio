@@ -1,10 +1,5 @@
-// =========================================
-// GameboyScreen — pantalla interna de la Gameboy
-// Muestra: skills, nombre, links
-// Renderizado dentro de la pantalla LCD de la Gameboy CSS
-// =========================================
 
-// Skills con íconos Devicon
+
 const SKILLS = [
   { name: 'React',      icon: 'devicon-react-original',        color: '#61dafb' },
   { name: 'JS',         icon: 'devicon-javascript-plain',       color: '#f7df1e' },
@@ -21,7 +16,7 @@ import styles from './GameboyScreen.module.css';
 export default function GameboyScreen() {
   return (
     <div className={styles.screen}>
-      {/* Encabezado con avatar */}
+
       <div className={styles.header}>
         <div className={styles.avatar} aria-label="Avatar">
           <span>✨</span>
@@ -34,7 +29,6 @@ export default function GameboyScreen() {
 
       <div className={styles.divider} />
 
-      {/* Grid de skills */}
       <p className={styles.sectionLabel}>SKILLS</p>
       <div className={styles.skillsGrid}>
         {SKILLS.map((skill) => (
@@ -49,7 +43,6 @@ export default function GameboyScreen() {
 
       <div className={styles.divider} />
 
-      {/* Links */}
       <div className={styles.links}>
         <a
           href="https://github.com/tu-usuario"

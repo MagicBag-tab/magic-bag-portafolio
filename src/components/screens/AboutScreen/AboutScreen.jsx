@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styles from './AboutScreen.module.css';
 
-// ─── Datos de skills con Devicons ─────────────────────────────────────────────
 const SKILLS = [
   { name: 'React',      icon: 'react/react-original' },
   { name: 'JavaScript',icon: 'javascript/javascript-original' },
@@ -15,7 +14,6 @@ const SKILLS = [
   { name: 'MongoDB',    icon: 'mongodb/mongodb-original' },
 ];
 
-// ─── Datos de logros ───────────────────────────────────────────────────────────
 const ACHIEVEMENTS = [
   { icon: '🎓', text: 'Ingeniería en Sistemas' },
   { icon: '💻', text: '2+ años de experiencia' },
@@ -23,31 +21,24 @@ const ACHIEVEMENTS = [
   { icon: '🌟', text: 'Top del salón en Algoritmos' },
 ];
 
-// ─── Redes sociales ────────────────────────────────────────────────────────────
 const SOCIAL = [
   { name: 'GitHub',   icon: '🐙', url: 'https://github.com/tu-usuario' },
   { name: 'LinkedIn', icon: '💼', url: 'https://linkedin.com/in/tu-usuario' },
   { name: 'Email',    icon: '✉️', url: 'mailto:tu@email.com' },
 ];
 
-// Pestañas disponibles
 const TABS = ['Historia', 'Skills', 'Logros', 'Contacto'];
 
-// =========================================
-// AboutScreen — pantalla "Sobre mí"
-// Props:
-//   onBack() — volver al mundo
-// =========================================
 export default function AboutScreen({ onBack }) {
   const [activeTab, setActiveTab] = useState('Historia');
 
   return (
     <div className={styles.screen}>
-      {/* Gatito decorativo en el rincón */}
+
       <div className={styles.decorativeCat} aria-hidden="true">🐱</div>
 
       <div className={styles.container}>
-        {/* Encabezado con avatar */}
+
         <div className={styles.profileHeader}>
           <div className={styles.avatar}>✨</div>
           <div className={styles.profileInfo}>
@@ -56,7 +47,6 @@ export default function AboutScreen({ onBack }) {
           </div>
         </div>
 
-        {/* Pestañas */}
         <div className={styles.tabs} role="tablist">
           {TABS.map((tab) => (
             <button
@@ -72,10 +62,8 @@ export default function AboutScreen({ onBack }) {
           ))}
         </div>
 
-        {/* Contenido de pestañas */}
         <div className={styles.tabContent} role="tabpanel">
 
-          {/* ── Historia ── */}
           {activeTab === 'Historia' && (
             <div className={styles.historyContent}>
               <p>
@@ -95,7 +83,6 @@ export default function AboutScreen({ onBack }) {
             </div>
           )}
 
-          {/* ── Skills ── */}
           {activeTab === 'Skills' && (
             <div className={styles.skillsGrid}>
               {SKILLS.map((skill) => (
@@ -112,7 +99,6 @@ export default function AboutScreen({ onBack }) {
             </div>
           )}
 
-          {/* ── Logros ── */}
           {activeTab === 'Logros' && (
             <div className={styles.achievementsList}>
               {ACHIEVEMENTS.map((a, i) => (
@@ -124,7 +110,6 @@ export default function AboutScreen({ onBack }) {
             </div>
           )}
 
-          {/* ── Contacto ── */}
           {activeTab === 'Contacto' && (
             <div className={styles.contactSection}>
               <p className={styles.contactIntro}>
@@ -151,7 +136,6 @@ export default function AboutScreen({ onBack }) {
         </div>
       </div>
 
-      {/* Botón volver */}
       <button
         id="about-back-btn"
         className={styles.backBtn}

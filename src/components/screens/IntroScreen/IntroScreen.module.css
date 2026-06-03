@@ -11,7 +11,6 @@
   overflow: hidden;
 }
 
-/* Nubes flotantes de fondo */
 .clouds {
   position: absolute;
   inset: 0;
@@ -25,7 +24,6 @@
   animation: floatUpDown 4s ease-in-out infinite;
 }
 
-/* Gatito sobre nube */
 .catOnCloud {
   display: flex;
   flex-direction: column;
@@ -37,7 +35,6 @@
 .catEmoji  { font-size: 4rem; margin-bottom: -1rem; z-index: 1; }
 .cloudBase { font-size: 5rem; filter: drop-shadow(0 4px 12px rgba(152, 136, 204, 0.3)); }
 
-/* Tarjeta principal */
 .card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
@@ -66,7 +63,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* Formulario */
 .form {
   display: flex;
   flex-direction: column;
@@ -116,7 +112,6 @@
   cursor: not-allowed;
 }
 
-/* Mensaje de bienvenida */
 .welcome {
   font-family: var(--font-main);
   font-size: 1.5rem;
@@ -125,7 +120,6 @@
   animation: fadeInScale 0.4s ease both;
 }
 
-/* Animaciones */
 @keyframes floatUpDown {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-10px); }

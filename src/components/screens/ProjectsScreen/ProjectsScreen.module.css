@@ -11,7 +11,6 @@
   padding: 2rem;
 }
 
-/* Flores pixel art de fondo */
 .flowersBg {
   position: absolute;
   inset: 0;
@@ -26,7 +25,6 @@
   opacity: 0.75;
 }
 
-/* Encabezado */
 .header {
   text-align: center;
   margin-bottom: 2rem;
@@ -47,7 +45,6 @@
   font-weight: 600;
 }
 
-/* Área de nodos */
 .nodesContainer {
   position: relative;
   width: 100%;
@@ -56,7 +53,6 @@
   flex: 1;
 }
 
-/* SVG de conexiones */
 .connectors {
   position: absolute;
   inset: 0;
@@ -65,7 +61,6 @@
   pointer-events: none;
 }
 
-/* Nodo de proyecto */
 .node {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -108,7 +103,6 @@
   font-weight: 600;
 }
 
-/* Botón volver */
 .backBtn {
   position: absolute;
   bottom: 1.5rem;
@@ -129,7 +123,6 @@
   background: rgba(255, 255, 255, 0.9);
 }
 
-/* Animaciones */
 @keyframes floatUpDown {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-8px); }

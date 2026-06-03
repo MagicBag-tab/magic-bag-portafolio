@@ -6,20 +6,11 @@ import ProjectDetailScreen  from './components/screens/ProjectDetail/ProjectDeta
 import Menu                 from './components/UI/Menu/Menu';
 import { projects }         from './data/projects';
 
-// =========================================
-// App — estado global y routing del portafolio
-//
-// Pantallas:
-//   'world'         — GameWorld siempre montado
-//   'projectDetail' — sala de detalle del proyecto
-//   'about'         — pantalla "sobre mí" (se activa desde la Gameboy)
-// =========================================
 export default function App() {
   const [currentScreen,    setCurrentScreen]    = useState('world');
   const [selectedProject,  setSelectedProject]  = useState(null);
   const [soundEnabled,     setSoundEnabled]      = useState(true);
 
-  // ── Toggle de sonido ────────────────────────────────────────────────────────
   const handleToggleSound = useCallback(() => {
     setSoundEnabled((prev) => {
       const next = !prev;
@@ -31,12 +22,10 @@ export default function App() {
     });
   }, []);
 
-  // ── Navegación ──────────────────────────────────────────────────────────────
   const handleNavigate = useCallback((screen) => {
     setCurrentScreen(screen);
   }, []);
 
-  // ── Entrar a la sala de un proyecto ─────────────────────────────────────────
   const handleEnterDoor = useCallback((projectId) => {
     const project = projects.find((p) => p.id === projectId);
     if (project) {
@@ -45,7 +34,6 @@ export default function App() {
     }
   }, []);
 
-  // ── Navegar entre proyectos dentro de la sala de detalle ────────────────────
   const handleProjectNav = useCallback((direction) => {
     setSelectedProject((prev) => {
       if (!prev) return prev;
@@ -55,24 +43,19 @@ export default function App() {
     });
   }, []);
 
-  // ── Volver al mundo desde cualquier pantalla ─────────────────────────────────
   const handleBackToWorld = useCallback(() => {
     setCurrentScreen('world');
   }, []);
 
   return (
     <>
-      {/*
-        GameWorld siempre montado — preserva la posición del gatito.
-        Las pantallas internas van encima con position: fixed.
-      */}
+
       <GameWorld
         onNavigate={handleNavigate}
         onEnterDoor={handleEnterDoor}
         soundEnabled={soundEnabled}
       />
 
-      {/* ── Sala de detalle del proyecto ── */}
       {currentScreen === 'projectDetail' && selectedProject && (
         <ProjectDetailScreen
           project={selectedProject}
@@ -84,7 +67,6 @@ export default function App() {
         />
       )}
 
-      {/* ── Menú hamburguesa — siempre visible ── */}
       <Menu
         soundEnabled={soundEnabled}
         onToggleSound={handleToggleSound}

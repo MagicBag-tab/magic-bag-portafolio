@@ -3,29 +3,27 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  /* Color base del cielo por si la imagen no carga */
+
   background: #f5d8f8;
 }
 
-/* Contenedor del mundo que se desplaza horizontalmente */
 .worldContent {
   position: absolute;
   top: 0;
   left: 0;
-  width: 4000px; /* WORLD_WIDTH */
+  width: 4000px;
   height: 100%;
   will-change: transform;
 }
 
-/* Nubes pixel art flotantes — posicionadas sobre las capas de parallax */
 .pixelCloud {
   position: absolute;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   pointer-events: none;
-  z-index: 8; /* encima de todas las capas parallax */
+  z-index: 8;
   animation: floatCloud 4s ease-in-out infinite;
-  /* La transición al cambiar img A/B crea el efecto de "parpadeo suave" */
+
   transition: opacity 0.4s ease;
 }
 
@@ -34,7 +32,6 @@
   50%       { transform: translateY(-12px); }
 }
 
-/* HUD de controles (esquina inferior central) */
 .controls {
   position: absolute;
   bottom: 16px;

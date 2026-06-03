@@ -56,7 +56,6 @@
   color: var(--color-purple);
 }
 
-/* Área de demo */
 .demoArea {
   border-radius: 16px;
   overflow: hidden;
@@ -102,7 +101,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* Tech tags */
 .techStack {
   display: flex;
   flex-wrap: wrap;
@@ -119,7 +117,6 @@
   border-radius: 20px;
 }
 
-/* Links */
 .links {
   display: flex;
   gap: 1rem;
@@ -151,7 +148,6 @@
   border-color: transparent;
 }
 
-/* Animaciones */
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }

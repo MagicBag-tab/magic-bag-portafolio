@@ -1,7 +1,7 @@
-/* PokemonAudience — sprites de Pokémon como audiencia */
+
 .pokemon {
   position: absolute;
-  bottom: 14%;      /* sobre el suelo */
+  bottom: 14%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,20 +10,17 @@
   image-rendering: pixelated;
 }
 
-/* Animación idle — se mecen suavemente */
 @keyframes pokeBob {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-6px); }
 }
 
-/* Sprite del Pokémon */
 .sprite {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2));
 }
 
-/* Estado de reacción — salta más alto */
 .pokemon.reacting {
   animation: pokeExcite 0.6s ease-in-out infinite;
 }
@@ -33,7 +30,6 @@
   50%       { transform: translateY(-14px); }
 }
 
-/* ¡! de exclamación estilo Pokémon */
 .exclamation {
   position: absolute;
   top: -24px;

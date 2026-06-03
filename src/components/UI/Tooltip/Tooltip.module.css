@@ -28,7 +28,6 @@
   display: block;
 }
 
-/* Flecha apuntando hacia abajo */
 .arrow {
   position: absolute;
   bottom: -8px;

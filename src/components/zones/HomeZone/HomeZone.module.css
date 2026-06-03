@@ -1,4 +1,4 @@
-/* HomeZone — zona central del mundo */
+
 .zone {
   position: absolute;
   top: 0;
@@ -8,17 +8,15 @@
   pointer-events: none;
 }
 
-/* ── Cartel RPG ──────────────────────────────────────────────────────────────── */
 .signpost {
   position: absolute;
-  bottom: 14%;        /* sobre el suelo */
+  bottom: 14%;
   display: flex;
   flex-direction: column;
   align-items: center;
   pointer-events: none;
 }
 
-/* Poste de madera */
 .pole {
   width: 8px;
   height: 80px;
@@ -27,7 +25,6 @@
   box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
 }
 
-/* Carteles */
 .sign {
   position: absolute;
   background: #fffbee;
@@ -52,10 +49,9 @@
   left: calc(100% + 6px);
 }
 
-/* ── Flores decorativas ───────────────────────────────────────────────────────── */
 .flower {
   position: absolute;
-  bottom: 13%;        /* justo sobre el suelo */
+  bottom: 13%;
   image-rendering: pixelated;
   animation: floatFlower 3.5s ease-in-out infinite;
   opacity: 0.85;

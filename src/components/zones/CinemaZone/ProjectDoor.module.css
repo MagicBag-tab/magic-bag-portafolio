@@ -1,4 +1,4 @@
-/* ProjectDoor — puerta pixel art por proyecto */
+
 .doorWrapper {
   position: absolute;
   bottom: 14%;
@@ -15,7 +15,6 @@
   transform: translateY(-4px);
 }
 
-/* ── Cartelito con nombre ── */
 .label {
   font-family: var(--font-pixel);
   font-size: 0.3rem;
@@ -30,7 +29,6 @@
   backdrop-filter: blur(4px);
 }
 
-/* ── Marco exterior de la puerta ── */
 .doorFrame {
   position: relative;
   width: 90px;
@@ -39,7 +37,6 @@
   align-items: center;
 }
 
-/* Arco superior */
 .arch {
   width: 80px;
   height: 30px;
@@ -52,7 +49,6 @@
     inset 0 0 6px rgba(0,0,0,0.3);
 }
 
-/* Hoja de la puerta */
 .door {
   width: 80px;
   height: 100px;
@@ -84,7 +80,6 @@
     inset 0 0 10px rgba(0,0,0,0.4);
 }
 
-/* Ventanita / vitral */
 .window {
   width: 44px;
   height: 36px;
@@ -107,7 +102,6 @@
   50%       { transform: scale(1.12); }
 }
 
-/* Línea central */
 .doorLine {
   position: absolute;
   top: 0;
@@ -118,7 +112,6 @@
   transform: translateX(-50%);
 }
 
-/* Manija */
 .knob {
   position: absolute;
   right: 10px;
@@ -130,7 +123,6 @@
   box-shadow: 0 0 6px var(--door-color, #d4b8f0);
 }
 
-/* Peldaño */
 .step {
   width: 100px;
   height: 10px;
@@ -140,7 +132,6 @@
   border-radius: 0 0 4px 4px;
 }
 
-/* ── Halo general ── */
 .glow {
   position: absolute;
   inset: -16px;

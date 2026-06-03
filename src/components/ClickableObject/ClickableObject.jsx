@@ -1,18 +1,6 @@
 import { useState } from 'react';
 import styles from './ClickableObject.module.css';
 
-// =========================================
-// ClickableObject — objeto del mundo que activa navegación
-// Props:
-//   id         — identificador único del objeto
-//   x          — posición X en el mundo (px)
-//   y          — posición Y en el mundo (px, desde arriba)
-//   label      — etiqueta visible (ej: "Mesa", "Portal")
-//   icon       — emoji o ícono del objeto
-//   isNear     — booleano: el gato está cerca
-//   onClick    — callback al hacer clic
-//   color      — color de fondo placeholder
-// =========================================
 export default function ClickableObject({
   id,
   x = 0,
@@ -41,7 +29,7 @@ export default function ClickableObject({
       aria-label={`Interactuar con ${label}`}
       onKeyDown={(e) => e.key === 'Enter' && handleClick()}
     >
-      {/* Indicador "¡Entra!" cuando el gato está cerca */}
+
       {isNear && (
         <div className={styles.prompt}>
           <span className={styles.promptArrow}>▼</span>
@@ -49,7 +37,6 @@ export default function ClickableObject({
         </div>
       )}
 
-      {/* Cuerpo del objeto */}
       <div
         className={styles.body}
         style={{ backgroundColor: color }}

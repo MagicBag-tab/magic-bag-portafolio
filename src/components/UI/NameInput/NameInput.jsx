@@ -1,14 +1,5 @@
 import styles from './NameInput.module.css';
 
-// =========================================
-// NameInput — componente de input del nombre del visitante
-// (usado en IntroScreen, pero también exportado por si se reutiliza)
-// Props:
-//   value       — valor actual del input
-//   onChange(e) — handler de cambio
-//   onSubmit()  — handler de envío
-//   placeholder — placeholder del input
-// =========================================
 export default function NameInput({
   value = '',
   onChange,

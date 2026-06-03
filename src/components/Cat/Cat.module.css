@@ -1,16 +1,14 @@
 .cat {
   position: absolute;
-  /* La posición real se aplica via style inline */
+
   transform-origin: bottom center;
-  pointer-events: none; /* el gato no bloquea clicks al mundo */
+  pointer-events: none;
   z-index: var(--z-cat);
 
-  /* Renderizado pixel-art nítido */
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
 
-/* Placeholder cuando no hay sprite cargado */
 .placeholder {
   width: 100%;
   height: 100%;

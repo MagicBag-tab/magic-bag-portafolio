@@ -1,10 +1,9 @@
-/* =========================================
-   VARIABLES GLOBALES - Paleta del portafolio
-   ========================================= */
+
+
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap');
 
 :root {
-  /* Colores principales */
+
   --color-sky: #f5d8f8;
   --color-sky-deep: #e8c0f0;
   --color-pink: #f0c0d8;
@@ -16,23 +15,19 @@
   --color-white: #ffffff;
   --color-white-soft: #fdf8ff;
 
-  /* Colores del suelo / naturaleza */
   --color-grass-light: #8fd45a;
   --color-grass-mid: #6aab3a;
   --color-grass-dark: #4a8820;
   --color-mountain: #c8a8e8;
   --color-mountain-dark: #a888cc;
 
-  /* Sombras y overlays */
   --shadow-soft: 0 4px 24px rgba(152, 136, 204, 0.18);
   --shadow-glow: 0 0 20px rgba(212, 184, 240, 0.5);
   --overlay-dreamy: rgba(245, 216, 248, 0.85);
 
-  /* Tipografías */
   --font-pixel: 'Press Start 2P', monospace;
   --font-main: 'Nunito', sans-serif;
 
-  /* Tamaños de fuente */
   --text-xs: 0.6rem;
   --text-sm: 0.8rem;
   --text-base: 1rem;
@@ -40,12 +35,10 @@
   --text-xl: 1.5rem;
   --text-2xl: 2rem;
 
-  /* Transiciones */
   --transition-screen: 0.5s ease-in-out;
   --transition-fast: 0.15s ease;
   --transition-medium: 0.3s ease;
 
-  /* Z-index layers */
   --z-world: 1;
   --z-cat: 10;
   --z-hud: 50;
@@ -53,13 +46,9 @@
   --z-menu: 200;
   --z-tooltip: 300;
 
-  /* Dimensiones del juego */
   --game-height: 100vh;
 }
 
-/* =========================================
-   RESET GLOBAL
-   ========================================= */
 *,
 *::before,
 *::after {
@@ -90,22 +79,15 @@ body {
   overflow: hidden;
 }
 
-/* =========================================
-   UTILIDADES GLOBALES
-   ========================================= */
-
-/* Renderizado pixel-art perfecto */
 .pixel-render {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
 
-/* Texto pixel */
 .font-pixel {
   font-family: var(--font-pixel);
 }
 
-/* Animación de entrada suave */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -127,7 +109,6 @@ body {
   100% { opacity: 0.7; }
 }
 
-/* Scrollbar personalizado (por si acaso) */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-sky); }
 ::-webkit-scrollbar-thumb { background: var(--color-lavender); border-radius: 3px; }

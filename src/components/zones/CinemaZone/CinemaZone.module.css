@@ -1,4 +1,4 @@
-/* CinemaZone — zona derecha del mundo */
+
 .zone {
   position: absolute;
   top: 0;
@@ -8,7 +8,6 @@
   pointer-events: none;
 }
 
-/* Posicionamiento absoluto de la pantalla de cine */
 .cinemaScreenPos {
   position: absolute;
   pointer-events: all;

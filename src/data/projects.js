@@ -1,7 +1,4 @@
-// =========================================
-// DATOS DE PROYECTOS — portafolio
-// Rellena con tu info real cuando estés lista
-// =========================================
+
 
 export const projects = [
   {
@@ -15,9 +12,9 @@ export const projects = [
     demo: 'https://tu-demo.vercel.app',
     video: '',
     screenshot: '',
-    pokemon: 'pikachu',     // pokémon guardián de esta sala
-    doorX: 4350,            // posición de su puerta en el mundo (= DOOR_START_X)
-    color: '#FFD700',       // color acento de esta sala
+    pokemon: 'pikachu',
+    doorX: 4350,
+    color: '#FFD700',
   },
   {
     id: 2,
@@ -31,7 +28,7 @@ export const projects = [
     video: '',
     screenshot: '',
     pokemon: 'eevee',
-    doorX: 4570,            // DOOR_START_X + DOOR_SPACING
+    doorX: 4570,
     color: '#C77DFF',
   },
   {
@@ -46,7 +43,7 @@ export const projects = [
     video: '',
     screenshot: '',
     pokemon: 'bulbasaur',
-    doorX: 4790,            // DOOR_START_X + DOOR_SPACING * 2
+    doorX: 4790,
     color: '#80ED99',
   },
 ];

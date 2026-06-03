@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { projects } from '../../../data/projects';
 
-// ─── Flores pixel art reales ─────────────────────────────────────────────────
 import { flower1, flower2, flower3, star } from '../../../assets/index';
 
 import styles from './ProjectsScreen.module.css';
 
-// Configuración de flores decorativas para el fondo
 const DECORATIVE_FLOWERS = [
   { img: flower1, x: '5%',  y: '20%', size: 80,  rotate: -10, delay: 0    },
   { img: flower2, x: '12%', y: '55%', size: 65,  rotate: 8,   delay: 0.3  },
@@ -18,16 +16,12 @@ const DECORATIVE_FLOWERS = [
   { img: flower3, x: '3%',  y: '80%', size: 65,  rotate: 5,   delay: 1.1  },
 ];
 
-// =========================================
-// ProjectsScreen — galería de proyectos con flores pixel art reales
-// =========================================
 export default function ProjectsScreen({ onSelectProject, onBack, visitorName }) {
   const [hoveredId, setHoveredId] = useState(null);
 
   return (
     <div className={styles.screen}>
 
-      {/* ── Flores decorativas reales ── */}
       <div className={styles.flowersBg} aria-hidden="true">
         {DECORATIVE_FLOWERS.map((f, i) => (
           <img
@@ -46,7 +40,6 @@ export default function ProjectsScreen({ onSelectProject, onBack, visitorName })
         ))}
       </div>
 
-      {/* ── Encabezado ── */}
       <div className={styles.header}>
         <h1 className={styles.title}>✨ Mis Proyectos</h1>
         {visitorName && (
@@ -54,9 +47,8 @@ export default function ProjectsScreen({ onSelectProject, onBack, visitorName })
         )}
       </div>
 
-      {/* ── Nodos de proyectos ── */}
       <div className={styles.nodesContainer}>
-        {/* Líneas conectoras SVG */}
+
         <svg className={styles.connectors} aria-hidden="true">
           {projects.map((project, i) => {
             if (i === 0) return null;
@@ -78,7 +70,6 @@ export default function ProjectsScreen({ onSelectProject, onBack, visitorName })
           })}
         </svg>
 
-        {/* Nodos */}
         {projects.map((project) => (
           <button
             key={project.id}
@@ -102,7 +93,6 @@ export default function ProjectsScreen({ onSelectProject, onBack, visitorName })
         ))}
       </div>
 
-      {/* ── Botón volver ── */}
       <button
         id="projects-back-btn"
         className={styles.backBtn}

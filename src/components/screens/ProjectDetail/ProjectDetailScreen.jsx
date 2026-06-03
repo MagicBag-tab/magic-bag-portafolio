@@ -1,11 +1,8 @@
-import { projects } from '../../../data/projects';
 import styles from './ProjectDetailScreen.module.css';
 
-// URL base para sprites de Pokémon
 const POKE_SPRITE = (id) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
-// Mapa de nombre a ID de PokeAPI
 const POKEMON_IDS = {
   pikachu:   25,
   eevee:     133,
@@ -14,38 +11,33 @@ const POKEMON_IDS = {
   bulbasaur: 1,
 };
 
-// =========================================
-// ProjectDetailScreen — sala de detalle de un proyecto
-// Estética: sala de cine interior oscura
-//
-// Props:
-//   project  — objeto del proyecto activo
-//   onBack   — callback para volver al mundo
-// =========================================
+const STARS = Array.from({ length: 30 }, (_, i) => {
+  const size = ((i * 7) % 3) + 1;
+  return {
+    left: `${(i * 37) % 100}%`,
+    top: `${(i * 53 + 17) % 100}%`,
+    animationDelay: `${((i * 19) % 30) / 10}s`,
+    width: `${size}px`,
+    height: `${size}px`,
+  };
+});
+
 export default function ProjectDetailScreen({ project, onBack, onPrevProject, onNextProject, hasPrev, hasNext }) {
   const pokemonId = POKEMON_IDS[project.pokemon] ?? 25;
 
   return (
     <div className={styles.screen} style={{ '--accent': project.color }}>
 
-      {/* ── Fondo de estrellas / cielo nocturno ── */}
       <div className={styles.starsBg} aria-hidden="true">
-        {[...Array(30)].map((_, i) => (
+        {STARS.map((star, i) => (
           <div
             key={i}
             className={styles.star}
-            style={{
-              left:             `${Math.random() * 100}%`,
-              top:              `${Math.random() * 100}%`,
-              animationDelay:   `${Math.random() * 3}s`,
-              width:            `${Math.random() * 3 + 1}px`,
-              height:           `${Math.random() * 3 + 1}px`,
-            }}
+            style={star}
           />
         ))}
       </div>
 
-      {/* ── Header ── */}
       <div className={styles.header}>
         <button
           id="project-back-btn"
@@ -82,7 +74,6 @@ export default function ProjectDetailScreen({ project, onBack, onPrevProject, on
         </div>
       </div>
 
-      {/* ── Pantalla de cine (preview del proyecto) ── */}
       <div className={styles.cinemaFrame}>
         {project.video ? (
           <iframe
@@ -104,16 +95,13 @@ export default function ProjectDetailScreen({ project, onBack, onPrevProject, on
           </div>
         )}
 
-        {/* Efecto de borde de cine */}
         <div className={styles.cinemaMask} />
       </div>
 
-      {/* ── Info del proyecto ── */}
       <div className={styles.infoSection}>
         <h1 className={styles.title}>{project.title}</h1>
         <p className={styles.description}>{project.longDescription}</p>
 
-        {/* Stack tecnológico */}
         <div className={styles.techStack}>
           {project.tech.map((t) => (
             <span key={t} className={styles.techBadge}>{t}</span>
@@ -121,7 +109,6 @@ export default function ProjectDetailScreen({ project, onBack, onPrevProject, on
         </div>
       </div>
 
-      {/* ── Navegación anterior / siguiente ── */}
       <div className={styles.projectNav}>
         {hasPrev ? (
           <button
@@ -144,7 +131,6 @@ export default function ProjectDetailScreen({ project, onBack, onPrevProject, on
         ) : <div />}
       </div>
 
-      {/* ── Pokémon guardián en la esquina ── */}
       <div className={styles.guardian} aria-hidden="true">
         <img
           src={POKE_SPRITE(pokemonId)}

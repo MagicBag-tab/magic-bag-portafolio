@@ -1,18 +1,12 @@
 import styles from './ProjectDetail.module.css';
 
-// =========================================
-// ProjectDetail — detalle de un proyecto
-// Props:
-//   project — objeto del proyecto seleccionado
-//   onBack() — volver a la lista de proyectos
-// =========================================
 export default function ProjectDetail({ project, onBack }) {
   if (!project) return null;
 
   return (
     <div className={styles.screen}>
       <div className={styles.card}>
-        {/* Botón volver */}
+
         <button
           id="detail-back-btn"
           className={styles.backBtn}
@@ -22,13 +16,11 @@ export default function ProjectDetail({ project, onBack }) {
           ← Proyectos
         </button>
 
-        {/* Encabezado */}
         <div className={styles.header}>
           <h1 className={styles.title}>{project.title}</h1>
           <p className={styles.description}>{project.description}</p>
         </div>
 
-        {/* Demo / screenshot */}
         <div className={styles.demoArea}>
           {project.video ? (
             <iframe
@@ -52,17 +44,14 @@ export default function ProjectDetail({ project, onBack }) {
           )}
         </div>
 
-        {/* Descripción larga */}
         <p className={styles.longDescription}>{project.longDescription}</p>
 
-        {/* Tech stack */}
         <div className={styles.techStack}>
           {project.tech.map((t) => (
             <span key={t} className={styles.techTag}>{t}</span>
           ))}
         </div>
 
-        {/* Links */}
         <div className={styles.links}>
           {project.github && (
             <a

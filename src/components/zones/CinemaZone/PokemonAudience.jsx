@@ -1,18 +1,9 @@
 import { POKEMON_AUDIENCE } from '../../../constants/game';
 import styles from './PokemonAudience.module.css';
 
-// ─── URL base de sprites PokeAPI ──────────────────────────────────────────────
 const POKE_SPRITE_URL = (id) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
-// =========================================
-// PokemonAudience — Pokémon sentados mirando la pantalla
-// Son decorativos, tienen animación CSS idle
-//
-// Props:
-//   nearProjectId — id del proyecto al que el gato está cerca
-//                   El Pokémon guardián de ese proyecto "reacciona"
-// =========================================
 export default function PokemonAudience({ nearProjectId = null }) {
   return (
     <>
@@ -40,7 +31,7 @@ export default function PokemonAudience({ nearProjectId = null }) {
               }}
               loading="lazy"
             />
-            {/* Reacción: exclamación cuando el proyecto está activo */}
+
             {isReacting && (
               <div className={styles.exclamation} aria-hidden="true">!</div>
             )}

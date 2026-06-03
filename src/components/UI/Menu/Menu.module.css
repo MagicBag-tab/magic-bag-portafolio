@@ -1,4 +1,4 @@
-/* Botón hamburguesa */
+
 .hamburger {
   position: fixed;
   top: 1rem;
@@ -35,7 +35,6 @@
   transform-origin: center;
 }
 
-/* Animación de X cuando está abierto */
 .hamburgerOpen .bar:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -46,7 +45,6 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Overlay oscuro */
 .overlay {
   position: fixed;
   inset: 0;
@@ -55,7 +53,6 @@
   animation: fadeIn 0.2s ease both;
 }
 
-/* Panel de menú */
 .panel {
   position: fixed;
   top: 0;
@@ -88,7 +85,6 @@
   border-bottom: 1px solid rgba(212, 184, 240, 0.3);
 }
 
-/* Lista de navegación */
 .navList {
   list-style: none;
   display: flex;
@@ -121,14 +117,12 @@
   color: var(--color-purple);
 }
 
-/* Divisor */
 .divider {
   height: 1px;
   background: rgba(212, 184, 240, 0.3);
   margin: 0.5rem 0 1rem;
 }
 
-/* Toggle de sonido */
 .soundToggle {
   display: flex;
   align-items: center;
@@ -154,7 +148,6 @@
   color: var(--color-purple-deep);
 }
 
-/* Animaciones */
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }

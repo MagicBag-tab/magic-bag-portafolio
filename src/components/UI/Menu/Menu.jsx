@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import styles from './Menu.module.css';
 
-// =========================================
-// Menu — menú hamburguesa siempre visible
-// Props:
-//   soundEnabled  — estado actual del sonido
-//   onToggleSound — callback para alternar sonido
-//   onNavigate(screen) — callback para navegar
-//   currentScreen — pantalla actual
-// =========================================
 export default function Menu({ soundEnabled, onToggleSound, onNavigate, currentScreen }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +14,7 @@ export default function Menu({ soundEnabled, onToggleSound, onNavigate, currentS
 
   return (
     <>
-      {/* Botón hamburguesa */}
+
       <button
         id="hamburger-btn"
         className={`${styles.hamburger} ${isOpen ? styles.hamburgerOpen : ''}`}
@@ -35,7 +27,6 @@ export default function Menu({ soundEnabled, onToggleSound, onNavigate, currentS
         <span className={styles.bar} />
       </button>
 
-      {/* Overlay / panel del menú */}
       {isOpen && (
         <div
           className={styles.overlay}
@@ -48,10 +39,9 @@ export default function Menu({ soundEnabled, onToggleSound, onNavigate, currentS
         className={`${styles.panel} ${isOpen ? styles.panelOpen : ''}`}
         aria-label="Menú de navegación"
       >
-        {/* Título */}
+
         <p className={styles.panelTitle}>✨ Menú</p>
 
-        {/* Navegación */}
         <ul className={styles.navList}>
           <li>
             <button
@@ -82,10 +72,8 @@ export default function Menu({ soundEnabled, onToggleSound, onNavigate, currentS
           </li>
         </ul>
 
-        {/* Divisor */}
         <div className={styles.divider} />
 
-        {/* Toggle de sonido */}
         <button
           id="sound-toggle-btn"
           className={styles.soundToggle}

@@ -6,7 +6,7 @@
   gap: 6px;
   cursor: pointer;
   pointer-events: auto;
-  transform: translateX(-50%); /* centrar horizontalmente sobre X */
+  transform: translateX(-50%);
   transition: transform var(--transition-fast);
   z-index: var(--z-cat);
 }
@@ -17,14 +17,12 @@
   border-radius: 8px;
 }
 
-/* Efecto hover / cerca */
 .object.hovered .body,
 .object.near .body {
   box-shadow: 0 0 16px rgba(212, 184, 240, 0.7);
   transform: translateY(-4px);
 }
 
-/* Prompt "¡Entra!" */
 .prompt {
   display: flex;
   flex-direction: column;
@@ -50,7 +48,6 @@
   box-shadow: var(--shadow-soft);
 }
 
-/* Cuerpo del objeto */
 .body {
   width: 72px;
   height: 72px;
@@ -79,7 +76,6 @@
   line-height: 1.2;
 }
 
-/* Animaciones globales (referenciadas desde globals.css) */
 @keyframes floatUpDown {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-6px); }

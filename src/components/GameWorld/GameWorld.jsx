@@ -8,11 +8,9 @@ import { useWorldCamera } from '../../hooks/useWorldCamera';
 import {
   GAMEBOY_X,
   OBJECT_IDS,
-  getFloorY,
 } from '../../constants/game';
 import { projects } from '../../data/projects';
 
-// ─── Assets ───────────────────────────────────────────────────────────────────
 import {
   skyBg,
   cloudsFar,
@@ -29,9 +27,6 @@ import {
 
 import styles from './GameWorld.module.css';
 
-// ─── Capas de parallax ────────────────────────────────────────────────────────
-// Nota sobre el gap: las capas de nubes y montañas se superponen verticalmente
-// usando altura mayor y ajuste de backgroundPosition para evitar huecos.
 const PARALLAX_LAYERS = [
   {
     id: 'sky',
@@ -45,7 +40,7 @@ const PARALLAX_LAYERS = [
     id: 'clouds-far',
     speed: 0.10,
     imageUrl: cloudsFar,
-    height: '70%',        // más alto para cubrir sin gap
+    height: '70%',
     zIndex: 2,
     style: { top: '-5%', backgroundSize: 'auto 100%', backgroundRepeat: 'repeat-x' },
   },
@@ -69,7 +64,7 @@ const PARALLAX_LAYERS = [
     id: 'mountains',
     speed: 0.45,
     imageUrl: mountainsBg,
-    height: '70%',        // más alto para llegar hasta el suelo
+    height: '70%',
     zIndex: 5,
     style: {
       bottom: 0,
@@ -83,7 +78,7 @@ const PARALLAX_LAYERS = [
     id: 'ground-flowers',
     speed: 0.85,
     imageUrl: groundFlowers,
-    height: '22%',        // flores del suelo, más altas para solapar el suelo
+    height: '22%',
     zIndex: 6,
     style: {
       bottom: '12%',
@@ -109,7 +104,6 @@ const PARALLAX_LAYERS = [
   },
 ];
 
-// ─── Nubes pixel art flotantes ─────────────────────────────────────────────────
 const PIXEL_CLOUDS = [
   { id: 'pc1', x: 400,  y: 60,  imgA: cloudA1, imgB: cloudB1, scale: 2.4, delay: 0    },
   { id: 'pc2', x: 1100, y: 45,  imgA: cloudA2, imgB: cloudB2, scale: 2.0, delay: 1200 },
@@ -119,11 +113,9 @@ const PIXEL_CLOUDS = [
   { id: 'pc6', x: 4800, y: 55,  imgA: cloudA2, imgB: cloudB2, scale: 2.2, delay: 1000 },
 ];
 
-// ─── Lista de interactables para el gato ──────────────────────────────────────
-// Incluye la Gameboy y todas las puertas de proyectos
 const buildInteractables = () => {
   const list = [
-    { id: OBJECT_IDS.GAMEBOY, x: GAMEBOY_X + 130 }, // centro de la Gameboy
+    { id: OBJECT_IDS.GAMEBOY, x: GAMEBOY_X + 130 },
   ];
   projects.forEach((p) => {
     list.push({ id: `${OBJECT_IDS.DOOR_BASE}${p.id}`, x: p.doorX + 45 });
@@ -133,9 +125,6 @@ const buildInteractables = () => {
 
 const INTERACTABLES = buildInteractables();
 
-// =========================================
-// GameWorld — mundo 2D con 3 zonas y parallax
-// =========================================
 export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
   const [nearObjectId, setNearObjectId]   = useState(null);
   const [cameraOffsetX, setCameraOffsetX] = useState(0);
@@ -145,7 +134,6 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
   const musicRef           = useRef(null);
   const hasStarted         = useRef(false);
 
-  // ── Música de fondo ───────────────────────────────────────────────────────────
   useEffect(() => {
     const audio = new Audio(bgMusic1);
     audio.loop   = true;
@@ -171,7 +159,6 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
     };
   }, []);
 
-  // Responder a cambios del toggle de sonido
   useEffect(() => {
     const audio = musicRef.current;
     if (!audio) return;
@@ -182,13 +169,11 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
     }
   }, [soundEnabled]);
 
-  // ── Alternancia de nubes pixel art (A↔B) cada 1.5s ────────────────────────────
   useEffect(() => {
     const id = setInterval(() => setCloudVariant((v) => !v), 1500);
     return () => clearInterval(id);
   }, []);
 
-  // ── Callbacks del gato ────────────────────────────────────────────────────────
   const handleNearObject = useCallback((id) => {
     setNearObjectId(id);
   }, []);
@@ -202,7 +187,6 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
     setCameraOffsetX(offset);
   }, [computeCamera]);
 
-  // ── Click en la Gameboy ────────────────────────────────────────────────────────
   const handleGameboyActivate = useCallback(() => {
     const sfx = new Audio(clickSfx);
     sfx.volume = 0.6;
@@ -210,7 +194,6 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
     onNavigate('about');
   }, [onNavigate]);
 
-  // ── Click en una puerta de proyecto ───────────────────────────────────────────
   const handleEnterDoor = useCallback((projectId) => {
     const sfx = new Audio(clickSfx);
     sfx.volume = 0.6;
@@ -221,7 +204,6 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
   return (
     <div className={styles.world} aria-label="Mundo del portafolio">
 
-      {/* ── Capas de parallax (fijas al viewport) ── */}
       {PARALLAX_LAYERS.map((layer) => (
         <ParallaxLayer
           key={layer.id}
@@ -234,7 +216,6 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
         />
       ))}
 
-      {/* ── Nubes pixel art flotantes (entre capas) ── */}
       {PIXEL_CLOUDS.map((cloud) => {
         const img        = cloudVariant ? cloud.imgB : cloud.imgA;
         const parallaxX  = -(cameraOffsetX * 0.25);
@@ -255,27 +236,23 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
         );
       })}
 
-      {/* ── Contenido del mundo (translateX de cámara) ── */}
       <div
         className={styles.worldContent}
         style={{ transform: `translateX(${-cameraOffsetX}px)` }}
       >
-        {/* Zona izquierda — Gameboy */}
+
         <GameboyZone
           isNear={nearObjectId === OBJECT_IDS.GAMEBOY}
           onActivate={handleGameboyActivate}
         />
 
-        {/* Zona central — cartel y flores */}
         <HomeZone />
 
-        {/* Zona derecha — cine Pokémon */}
         <CinemaZone
           nearObjectId={nearObjectId}
           onEnterDoor={handleEnterDoor}
         />
 
-        {/* Gatito */}
         <Cat
           interactables={INTERACTABLES}
           onNearObject={handleNearObject}
@@ -284,7 +261,6 @@ export default function GameWorld({ onNavigate, onEnterDoor, soundEnabled }) {
         />
       </div>
 
-      {/* ── HUD de controles ── */}
       <div className={styles.controls} aria-label="Controles del juego">
         <span>← →  Mover</span>
         <span>Espacio  Saltar</span>

@@ -1,4 +1,4 @@
-/* GameboyZone — zona izquierda del mundo */
+
 .zone {
   position: absolute;
   top: 0;
@@ -8,7 +8,6 @@
   pointer-events: none;
 }
 
-/* ── Fondo de vacío (cielo oscuro a la izquierda del precipicio) ── */
 .voidBg {
   position: absolute;
   top: 0;
@@ -23,10 +22,9 @@
   pointer-events: none;
 }
 
-/* ── Borde del precipicio ── */
 .cliffEdge {
   position: absolute;
-  bottom: 14%;      /* alineado con la base del suelo */
+  bottom: 14%;
   width: 40px;
   height: 80px;
   background: linear-gradient(
@@ -37,11 +35,10 @@
     transparent 100%
   );
   border-radius: 0 0 8px 0;
-  /* Sombra de profundidad que da el efecto "borde de plataforma" */
+
   box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.22);
 }
 
-/* ── Wrapper de la Gameboy ── */
 .gameboyWrapper {
   position: absolute;
   cursor: pointer;
@@ -59,12 +56,11 @@
   50%       { transform: translateY(-14px) rotate(1deg); }
 }
 
-/* ── Cuerpo de la Gameboy (CSS DMG-01) ── */
 .gameboyBody {
   width: 100%;
   height: 100%;
   background: linear-gradient(160deg, #c8c8c0 0%, #b8b8b0 50%, #a0a098 100%);
-  border-radius: 12px 12px 50px 12px;  /* esquina inferior derecha redondeada = estilo DMG */
+  border-radius: 12px 12px 50px 12px;
   border: 3px solid #888880;
   position: relative;
   display: flex;
@@ -78,7 +74,6 @@
   gap: 0;
 }
 
-/* ── Logo ── */
 .gameboyLogo {
   display: flex;
   align-items: center;
@@ -99,7 +94,6 @@
   letter-spacing: 1px;
 }
 
-/* ── Marco exterior de la pantalla ── */
 .screenOuter {
   background: linear-gradient(145deg, #888880 0%, #999990 100%);
   border-radius: 8px 8px 20px 8px;
@@ -117,7 +111,6 @@
   align-items: center;
 }
 
-/* DOT MATRIX label */
 .dotMatrix {
   font-family: var(--font-pixel);
   font-size: 0.2rem;
@@ -131,7 +124,6 @@
   display: block;
 }
 
-/* ── LCD verde ── */
 .lcdScreen {
   border-radius: 3px;
   overflow: hidden;
@@ -141,7 +133,6 @@
   image-rendering: pixelated;
 }
 
-/* ── Fila de controles ── */
 .controlsRow {
   display: flex;
   align-items: center;
@@ -151,7 +142,6 @@
   padding: 0 4px;
 }
 
-/* ── D-Pad ── */
 .dpad {
   position: relative;
   width: 52px;
@@ -179,7 +169,6 @@
   z-index: 1;
 }
 
-/* ── Start / Select ── */
 .startSelect {
   display: flex;
   flex-direction: column;
@@ -206,7 +195,6 @@
   color: #333;
 }
 
-/* ── Botones A/B ── */
 .abButtons {
   display: flex;
   gap: 6px;
@@ -230,7 +218,6 @@
 .btnA { background: #c0392b; }
 .btnB { background: #8e44ad; }
 
-/* ── Altavoces ── */
 .speaker {
   display: flex;
   gap: 4px;
@@ -247,7 +234,6 @@
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
 }
 
-/* ── Halo de brillo ── */
 .glow {
   position: absolute;
   inset: -12px;
@@ -268,7 +254,6 @@
   50%       { transform: scale(1.05); opacity: 0.9; }
 }
 
-/* ── Nubes decorativas en el vacío ── */
 .voidClouds {
   position: absolute;
   top: 0;
